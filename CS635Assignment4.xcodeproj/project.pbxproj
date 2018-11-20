@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490033E36B2BD34277062B64 /* Pods_CS635Assignment4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D760A2C74FB164664352C4DD /* Pods_CS635Assignment4.framework */; };
+		6CE946C47CA740489D509968 /* Pods_CS635Assignment4Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73A33D59708838C573BB0BF /* Pods_CS635Assignment4Tests.framework */; };
 		F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66DF21A3B8A500CA850A /* AppDelegate.swift */; };
 		F94E66E221A3B8A500CA850A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66E121A3B8A500CA850A /* ViewController.swift */; };
 		F94E66E521A3B8A500CA850A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E66E321A3B8A500CA850A /* Main.storyboard */; };
@@ -26,6 +28,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		54C9A07C2DDE0649B52D1530 /* Pods-CS635Assignment4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.debug.xcconfig"; sourceTree = "<group>"; };
+		A1B0169650C8A0FED4E717CC /* Pods-CS635Assignment4Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4Tests/Pods-CS635Assignment4Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A59569127D42992235733723 /* Pods-CS635Assignment4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.release.xcconfig"; sourceTree = "<group>"; };
+		C73A33D59708838C573BB0BF /* Pods_CS635Assignment4Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS635Assignment4Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7E0EEFD280D4196C3017ED2 /* Pods-CS635Assignment4Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4Tests/Pods-CS635Assignment4Tests.release.xcconfig"; sourceTree = "<group>"; };
+		D760A2C74FB164664352C4DD /* Pods_CS635Assignment4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS635Assignment4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E66DC21A3B8A500CA850A /* CS635Assignment4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS635Assignment4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E66DF21A3B8A500CA850A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94E66E121A3B8A500CA850A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490033E36B2BD34277062B64 /* Pods_CS635Assignment4.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +59,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CE946C47CA740489D509968 /* Pods_CS635Assignment4Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2CDD5F0CE289F991497CFE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D760A2C74FB164664352C4DD /* Pods_CS635Assignment4.framework */,
+				C73A33D59708838C573BB0BF /* Pods_CS635Assignment4Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F9344EFC0DA865570F3CA58D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54C9A07C2DDE0649B52D1530 /* Pods-CS635Assignment4.debug.xcconfig */,
+				A59569127D42992235733723 /* Pods-CS635Assignment4.release.xcconfig */,
+				A1B0169650C8A0FED4E717CC /* Pods-CS635Assignment4Tests.debug.xcconfig */,
+				C7E0EEFD280D4196C3017ED2 /* Pods-CS635Assignment4Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F94E66D321A3B8A500CA850A = {
 			isa = PBXGroup;
 			children = (
 				F94E66DE21A3B8A500CA850A /* CS635Assignment4 */,
 				F94E66F321A3B8A600CA850A /* CS635Assignment4Tests */,
 				F94E66DD21A3B8A500CA850A /* Products */,
+				F9344EFC0DA865570F3CA58D /* Pods */,
+				B2CDD5F0CE289F991497CFE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F94E66F921A3B8A600CA850A /* Build configuration list for PBXNativeTarget "CS635Assignment4" */;
 			buildPhases = (
+				FC5CCC8DA298B44D706E8B77 /* [CP] Check Pods Manifest.lock */,
 				F94E66D821A3B8A500CA850A /* Sources */,
 				F94E66D921A3B8A500CA850A /* Frameworks */,
 				F94E66DA21A3B8A500CA850A /* Resources */,
+				95C75720753D929C3F81F1D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,6 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F94E66FC21A3B8A600CA850A /* Build configuration list for PBXNativeTarget "CS635Assignment4Tests" */;
 			buildPhases = (
+				14454CD6CD671A263AA8ECBD /* [CP] Check Pods Manifest.lock */,
 				F94E66EC21A3B8A600CA850A /* Sources */,
 				F94E66ED21A3B8A600CA850A /* Frameworks */,
 				F94E66EE21A3B8A600CA850A /* Resources */,
@@ -191,6 +226,77 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14454CD6CD671A263AA8ECBD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CS635Assignment4Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		95C75720753D929C3F81F1D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC5CCC8DA298B44D706E8B77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CS635Assignment4-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F94E66D821A3B8A500CA850A /* Sources */ = {
@@ -358,6 +464,7 @@
 		};
 		F94E66FA21A3B8A600CA850A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C9A07C2DDE0649B52D1530 /* Pods-CS635Assignment4.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -376,6 +483,7 @@
 		};
 		F94E66FB21A3B8A600CA850A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59569127D42992235733723 /* Pods-CS635Assignment4.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -394,6 +502,7 @@
 		};
 		F94E66FD21A3B8A600CA850A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1B0169650C8A0FED4E717CC /* Pods-CS635Assignment4Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -415,6 +524,7 @@
 		};
 		F94E66FE21A3B8A600CA850A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7E0EEFD280D4196C3017ED2 /* Pods-CS635Assignment4Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

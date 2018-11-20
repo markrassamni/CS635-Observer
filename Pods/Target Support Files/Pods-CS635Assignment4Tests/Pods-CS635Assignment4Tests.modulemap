@@ -1,0 +1,6 @@
+framework module Pods_CS635Assignment4Tests {
+  umbrella header "Pods-CS635Assignment4Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
