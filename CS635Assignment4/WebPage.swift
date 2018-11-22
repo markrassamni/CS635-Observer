@@ -8,8 +8,14 @@
 
 import Foundation
 
-protocol WebPage {
-    var url: String { get }
-    var output: Output { get }
-    var recipient: String? { get }
+class WebPage {
+    let url: String
+    let output: Output
+    let recipient: String?
+    
+    init(url: String, output: Output, recipient: String?) {
+        self.url = url
+        self.output = output
+        self.recipient = recipient
+    }
 }
