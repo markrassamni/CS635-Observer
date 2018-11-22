@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD5C21A7451A00401DAB /* FileParser.swift */; };
+		0C8AAD5F21A74D7600401DAB /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD5E21A74D7600401DAB /* Output.swift */; };
+		0C8AAD6321A74EED00401DAB /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD6221A74EED00401DAB /* WebPage.swift */; };
+		0C8AAD6521A74F4F00401DAB /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD6421A74F4F00401DAB /* Email.swift */; };
+		0C8AAD6721A7507A00401DAB /* SMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD6621A7507A00401DAB /* SMS.swift */; };
+		0C8AAD6921A750CC00401DAB /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD6821A750CC00401DAB /* Console.swift */; };
 		490033E36B2BD34277062B64 /* Pods_CS635Assignment4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D760A2C74FB164664352C4DD /* Pods_CS635Assignment4.framework */; };
 		6CE946C47CA740489D509968 /* Pods_CS635Assignment4Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73A33D59708838C573BB0BF /* Pods_CS635Assignment4Tests.framework */; };
 		F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66DF21A3B8A500CA850A /* AppDelegate.swift */; };
@@ -28,6 +34,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C8AAD5C21A7451A00401DAB /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
+		0C8AAD5E21A74D7600401DAB /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		0C8AAD6221A74EED00401DAB /* WebPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
+		0C8AAD6421A74F4F00401DAB /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		0C8AAD6621A7507A00401DAB /* SMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMS.swift; sourceTree = "<group>"; };
+		0C8AAD6821A750CC00401DAB /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		54C9A07C2DDE0649B52D1530 /* Pods-CS635Assignment4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.debug.xcconfig"; sourceTree = "<group>"; };
 		A1B0169650C8A0FED4E717CC /* Pods-CS635Assignment4Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4Tests/Pods-CS635Assignment4Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A59569127D42992235733723 /* Pods-CS635Assignment4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +127,12 @@
 				F94E66E621A3B8A600CA850A /* Assets.xcassets */,
 				F94E66E821A3B8A600CA850A /* LaunchScreen.storyboard */,
 				F94E66EB21A3B8A600CA850A /* Info.plist */,
+				0C8AAD6221A74EED00401DAB /* WebPage.swift */,
+				0C8AAD5C21A7451A00401DAB /* FileParser.swift */,
+				0C8AAD5E21A74D7600401DAB /* Output.swift */,
+				0C8AAD6421A74F4F00401DAB /* Email.swift */,
+				0C8AAD6621A7507A00401DAB /* SMS.swift */,
+				0C8AAD6821A750CC00401DAB /* Console.swift */,
 			);
 			path = CS635Assignment4;
 			sourceTree = "<group>";
@@ -304,7 +322,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94E66E221A3B8A500CA850A /* ViewController.swift in Sources */,
+				0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */,
+				0C8AAD6521A74F4F00401DAB /* Email.swift in Sources */,
+				0C8AAD6921A750CC00401DAB /* Console.swift in Sources */,
+				0C8AAD6721A7507A00401DAB /* SMS.swift in Sources */,
+				0C8AAD6321A74EED00401DAB /* WebPage.swift in Sources */,
 				F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */,
+				0C8AAD5F21A74D7600401DAB /* Output.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
