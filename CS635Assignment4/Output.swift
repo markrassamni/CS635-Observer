@@ -13,10 +13,20 @@ class Output: UIViewController, MFMailComposeViewControllerDelegate {
     
     func sendEmail(to address: String, message: String){
         guard MFMailComposeViewController.canSendMail() else { return }
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([address])
-            mail.setMessageBody(message, isHTML: false)
-            present(mail, animated: true)
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients([address])
+        mail.setMessageBody(message, isHTML: false)
+        present(mail, animated: true)
+    }
+    
+    func sendText(to number: String, carrier: Carrier, message: String){
+        guard MFMailComposeViewController.canSendMail() else { return }
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        let address = "\(number)@\(carrier.address)"
+        mail.setToRecipients([address])
+        mail.setMessageBody(message, isHTML: false)
+        present(mail, animated: true)
     }
 }
