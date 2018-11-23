@@ -2,17 +2,24 @@
 //  ViewController.swift
 //  CS635Assignment4
 //
-//  Created by Mark Rassamni on 11/19/18.
-//  Copyright © 2018 Mark Rassamni. All rights reserved.
+//  Created by Mark Rassamni on 11/22/18.
+//  Copyright © 2018 markrassamni. All rights reserved.
 //
 
-import UIKit
+import Cocoa
 
-class ViewController: UIViewController {
+class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
+    }
+
+    override var representedObject: Any? {
+        didSet {
+        // Update the view, if already loaded.
+        }
     }
 
 

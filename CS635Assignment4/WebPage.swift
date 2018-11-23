@@ -10,10 +10,10 @@ import Foundation
 
 class WebPage {
     let url: String
-    let output: Output
+    let output: OutputType
     let recipient: String?
     
-    init(url: String, output: Output, recipient: String?) {
+    init(url: String, output: OutputType, recipient: String?) {
         self.url = url
         self.output = output
         self.recipient = recipient

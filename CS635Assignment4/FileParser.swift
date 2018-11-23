@@ -32,13 +32,13 @@ class FileParser {
             switch lineComponents[1]{
             case emailKey:
                 guard lineComponents.count == 3 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: Output.mail, recipient: lineComponents[2]))
+                webPages.append(WebPage(url: lineComponents[0], output: OutputType.mail, recipient: lineComponents[2]))
             case smsKey:
                 guard lineComponents.count == 3 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: Output.sms, recipient: lineComponents[2]))
+                webPages.append(WebPage(url: lineComponents[0], output: OutputType.sms, recipient: lineComponents[2]))
             case consoleKey:
                 guard lineComponents.count == 2 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: Output.console, recipient: nil))
+                webPages.append(WebPage(url: lineComponents[0], output: OutputType.console, recipient: nil))
             default:
                 continue
             }

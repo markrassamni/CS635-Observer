@@ -2,8 +2,8 @@
 //  CS635Assignment4Tests.swift
 //  CS635Assignment4Tests
 //
-//  Created by Mark Rassamni on 11/19/18.
-//  Copyright © 2018 Mark Rassamni. All rights reserved.
+//  Created by AJ Rassamni on 11/22/18.
+//  Copyright © 2018 markrassamni. All rights reserved.
 //
 
 import XCTest
