@@ -1,5 +1,5 @@
 //
-//  Output.swift
+//  OutputType.swift
 //  CS635Assignment4
 //
 //  Created by Mark Rassamni on 11/22/18.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-class Output {
-    
-    func sendEmail(to address: String, message: String){
-        
-    }
+enum OutputType {
+    case sms
+    case console
+    case mail
 }
