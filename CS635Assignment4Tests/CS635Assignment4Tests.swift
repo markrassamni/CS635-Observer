@@ -22,6 +22,8 @@ class CS635Assignment4Tests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+//        Output().sendEmail(to: "markrassamni@me.com", message: "Hi")
+//        print("Hi")
     }
 
     func testPerformanceExample() {

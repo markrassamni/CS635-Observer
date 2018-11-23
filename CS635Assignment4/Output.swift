@@ -16,7 +16,5 @@ class Output {
         service?.recipients = [address]
         service?.subject = "Website changed"
         service?.perform(withItems: [message])
-        
-        
     }
 }

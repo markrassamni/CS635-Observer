@@ -15,6 +15,10 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear() {
+//        Output().sendEmail(to: "markrassamni@me.com", message: "Hi")
+    }
 
     override var representedObject: Any? {
         didSet {
