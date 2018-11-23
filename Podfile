@@ -10,6 +10,7 @@ target 'CS635Assignment4' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'RxSwift',    '~> 4.0'
   pod 'RxCocoa',    '~> 4.0'
+  pod 'RxAlamofire'
 
   target 'CS635Assignment4Tests' do
     inherit! :search_paths

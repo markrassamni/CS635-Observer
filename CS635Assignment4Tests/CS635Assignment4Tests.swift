@@ -30,7 +30,7 @@ class CS635Assignment4Tests: XCTestCase {
 //        Factory().getDateModified(of: a)
     }
     
-    func testReturningDate(){
+    func testReturningADate(){
         let expectation = self.expectation(description: "Date Header")
         var date: String?
         Factory().getDateModified(of: testURL) { (response) in
@@ -39,6 +39,14 @@ class CS635Assignment4Tests: XCTestCase {
         }
         waitForExpectations(timeout: 10, handler: nil)
         XCTAssertNotNil(date)
+    }
+    
+    func testDateNoChange(){
+        // make 2 calls that return the same date, check for no output
+    }
+    
+    func testChangingDate(){
+        // make 2 calls that date changes, check for appropriate output
     }
 
     func testPerformanceExample() {
