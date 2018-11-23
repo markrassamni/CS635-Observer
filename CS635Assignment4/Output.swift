@@ -29,4 +29,8 @@ class Output: UIViewController, MFMailComposeViewControllerDelegate {
         mail.setMessageBody(message, isHTML: false)
         present(mail, animated: true)
     }
+    
+    func sendToConsole(message: String){
+        print(message)
+    }
 }
