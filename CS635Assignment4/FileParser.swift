@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class FileParser {
     
@@ -14,35 +15,33 @@ class FileParser {
     private let smsKey = "sms"
     private let consoleKey = "console"
     
-    func readFile(file: String) {
-        guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return }
+    // TODO: Return tuple [Observe(subscriber: Disposable, url: String)]. Or make it a struct?
+    func readFile(file: String) -> [Disposable]?{
+        guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return nil }
         let lines: [String]
         do {
             let data = try String(contentsOfFile: filePath, encoding: .utf8).lowercased()
+            let factory = ReactiveFactory()
+            let subject = factory.createStringPublishSubject()
             lines = data.components(separatedBy: .newlines)
-        } catch { return }
-        let _ = convertToOutputMethod(lines: lines)
-        // TODO: return an array of objects, change func name to BuildObjects..
-    }
-    
-    private func convertToOutputMethod(lines: [String]) -> [WebPage]{
-        var webPages = [WebPage]()
-        for line in lines {
-            let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
-            switch lineComponents[1]{
-            case emailKey:
-                guard lineComponents.count == 3 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: OutputType.mail, recipient: lineComponents[2]))
-            case smsKey:
-                guard lineComponents.count == 3 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: OutputType.sms, recipient: lineComponents[2]))
-            case consoleKey:
-                guard lineComponents.count == 2 else { continue }
-                webPages.append(WebPage(url: lineComponents[0], output: OutputType.console, recipient: nil))
-            default:
-                continue
+            var observers = [Disposable]()
+            for line in lines {
+                let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
+                switch lineComponents[1]{
+                case emailKey:
+                    guard lineComponents.count == 3 else { return nil }
+                    observers.append(subject.createEmailSubscriber(emailAddress: lineComponents[2]))
+                case smsKey:
+                    guard lineComponents.count == 3, let carrier = Carrier(name: lineComponents[3]) else { return nil }
+                    observers.append(subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier))
+                case consoleKey:
+                    guard lineComponents.count == 2 else { return nil }
+                    observers.append(subject.createConsoleSubscriber())
+                default:
+                    return nil
+                }
             }
-        }
-        return webPages
+            return observers
+        } catch { return nil }
     }
 }
