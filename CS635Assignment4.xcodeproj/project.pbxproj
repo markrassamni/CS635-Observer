@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C09C6B121A9F197009572C8 /* Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09C6B021A9F197009572C8 /* Reactive.swift */; };
+		0C09C6B321AA119C009572C8 /* PublishSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C09C6B221AA119C009572C8 /* PublishSubject.swift */; };
 		0C5FFE6121A7B69800C87F0A /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5FFE6021A7B69800C87F0A /* Output.swift */; };
 		0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD5C21A7451A00401DAB /* FileParser.swift */; };
 		0C8AAD5F21A74D7600401DAB /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD5E21A74D7600401DAB /* OutputType.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		0C09C6B021A9F197009572C8 /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
+		0C09C6B221AA119C009572C8 /* PublishSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubject.swift; sourceTree = "<group>"; };
 		0C5FFE6021A7B69800C87F0A /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		0C8AAD5C21A7451A00401DAB /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
 		0C8AAD5E21A74D7600401DAB /* OutputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputType.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */,
 				0CA6F83E21A873A600FC50B8 /* Factory.swift */,
 				0C09C6B021A9F197009572C8 /* Reactive.swift */,
+				0C09C6B221AA119C009572C8 /* PublishSubject.swift */,
 			);
 			path = CS635Assignment4;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */,
 				0C8AAD6321A74EED00401DAB /* WebPage.swift in Sources */,
 				F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */,
+				0C09C6B321AA119C009572C8 /* PublishSubject.swift in Sources */,
 				0C09C6B121A9F197009572C8 /* Reactive.swift in Sources */,
 				0C5FFE6121A7B69800C87F0A /* Output.swift in Sources */,
 				0C8AAD5F21A74D7600401DAB /* OutputType.swift in Sources */,
