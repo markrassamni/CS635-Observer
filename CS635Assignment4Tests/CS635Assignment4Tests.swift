@@ -41,6 +41,15 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertNotNil(date)
     }
     
+    func testConsoleOutput(){
+        let factory = Factory()
+        let subject = factory.createStringPublishSubject()
+        let _ = factory.createConsoleSubscriber(subject: subject)
+        subject.onNext("Date 1")
+        subject.onNext("Date 2")
+        
+    }
+    
     func testObserve(){
         Factory().testObserve(url: testURL)
     }

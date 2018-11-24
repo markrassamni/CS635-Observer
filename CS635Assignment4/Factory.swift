@@ -14,6 +14,8 @@ import RxAlamofire
 
 class Factory {
     
+    // TODO: Factory should be used exclusively for mock objects
+    
     func createConsoleObserver<E>(_ element: E) -> Observable<E>{
         
         return Observable.create { observer in
@@ -23,20 +25,83 @@ class Factory {
         }
     }
     
+    func createStringPublishSubject() -> PublishSubject<String> {
+        return PublishSubject<String>()
+    }
+    
+    func checkIfDateChanged(newDate: String) -> Bool{
+        let globalPastDate = "Date"
+        return newDate != globalPastDate
+    }
+    
+    func test(){
+        
+    }
+    
+    
+    
+    // Keep this let wherever subscribers are moved
+    let message = ""
+    func createEmailSubscriber(subject: PublishSubject<String>, emailAddress: String){
+        subject.subscribe { (event) in
+//            guard MFMailComposeViewController.canSendMail() else { return }
+//            let mail = MFMailComposeViewController()
+//            mail.mailComposeDelegate = self
+//            mail.setToRecipients([address])
+//            mail.setMessageBody(message, isHTML: false)
+//            present(mail, animated: true)
+        }
+    }
+    
+    func createSMSSubscriber(subject: PublishSubject<String>, number: String, carrier: Carrier){
+        subject.subscribe { (event) in
+//        guard MFMailComposeViewController.canSendMail() else { return }
+//        let mail = MFMailComposeViewController()
+//        mail.mailComposeDelegate = self
+//        let address = "\(number)@\(carrier.address)"
+//        mail.setToRecipients([address])
+//        mail.setMessageBody(message, isHTML: false)
+//        present(mail, animated: true)
+        }
+    }
+    
+    func createConsoleSubscriber(subject: PublishSubject<String>) -> Disposable{
+        return subject.subscribe { (event) in
+            guard let element = event.element else { return }
+            print(element)
+        }
+    }
+    
     func testObserve(url: String){
-        let a = request(.get, url).responseString().observeOn(MainScheduler.instance).subscribe {
+    
+        let subject = createStringPublishSubject()
+        subject.subscribe(onNext: {print("Subject = \($0)")})
+        subject.onNext("newDate")
+        
+        
+        
+        let a = request(.get, url).responseString().observeOn(MainScheduler.instance)
+//        MainScheduler.instance.schedulePeriodic(.normal, startAfter: RxTimeInterval(exactly: 0)!, period: RxTimeInterval(exactly: 5)!, action: a.do(onNext: { (response)  in
+//            print(response)
+//            print(stringVal)
+//            ()
+//        }))
+        
+        a.subscribe {
             if let b = $0.element {
                 let c = b.0.allHeaderFields
                 let date = c["Date"] as? String
-                print(c)
                 print(date) // Working to get date, optional, needs unwrapped
-                let d = b.1
-                print(d)
-                ()
             }
-//            print($0)
+            //            print($0)
             ()
         }
+        a.do(onNext: { (b) in
+            print("got it")
+            ()
+        })
+        
+        ()
         /*
         let a = createConsoleObserver(RxAlamofire.request(.get, url).responseJSON())
 //        let a = RxAlamofire.request(.get, url).responseJSON()

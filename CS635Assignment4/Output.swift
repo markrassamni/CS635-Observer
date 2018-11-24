@@ -11,6 +11,7 @@ import MessageUI
 
 class Output: UIViewController, MFMailComposeViewControllerDelegate {
     
+    // TODO: Change back to smtp email
     func sendEmail(to address: String, message: String){
         guard MFMailComposeViewController.canSendMail() else { return }
         let mail = MFMailComposeViewController()
