@@ -41,6 +41,10 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertNotNil(date)
     }
     
+    func testObserve(){
+        Factory().testObserve(url: testURL)
+    }
+    
     func testDateNoChange(){
         // make 2 calls that return the same date, check for no output
     }

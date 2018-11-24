@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let testURL = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        test2()
+    }
+    
+    func test1(){
         let a = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
         let b = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
         Factory().getDateModified(of: b) { (date) in
@@ -20,6 +26,10 @@ class ViewController: UIViewController {
             print(date)
             ()
         }
+    }
+    
+    func test2(){
+        Factory().testObserve(url: testURL)
     }
 
 
