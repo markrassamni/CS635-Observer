@@ -25,6 +25,18 @@
 		F94E66F521A3B8A600CA850A /* CS635Assignment4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		0C09C6B421AA1698009572C8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
 		F94E66F121A3B8A600CA850A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -164,8 +176,10 @@
 				F94E66D921A3B8A500CA850A /* Frameworks */,
 				F94E66DA21A3B8A500CA850A /* Resources */,
 				95C75720753D929C3F81F1D8 /* [CP] Embed Pods Frameworks */,
+				0C09C6B521AA16B7009572C8 /* ShellScript */,
 			);
 			buildRules = (
+				0C09C6B421AA1698009572C8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -253,6 +267,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C09C6B521AA16B7009572C8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:|WARNING:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"| perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
 		14454CD6CD671A263AA8ECBD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
