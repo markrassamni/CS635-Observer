@@ -15,8 +15,7 @@ class FileParser {
     private let smsKey = "sms"
     private let consoleKey = "console"
     
-    // TODO: Return tuple [Observe(subscriber: Disposable, url: String)]. Or make it a struct?
-    func readFile(file: String) -> [Disposable]?{
+    func readFile(file: String) -> [ObserveWebPage]?{
         guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return nil }
         let lines: [String]
         do {
@@ -24,19 +23,25 @@ class FileParser {
             let factory = ReactiveFactory()
             let subject = factory.createStringPublishSubject()
             lines = data.components(separatedBy: .newlines)
-            var observers = [Disposable]()
+            var observers = [ObserveWebPage]()
             for line in lines {
                 let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
                 switch lineComponents[1]{
                 case emailKey:
                     guard lineComponents.count == 3 else { return nil }
-                    observers.append(subject.createEmailSubscriber(emailAddress: lineComponents[2]))
+                    let subscriber = subject.createEmailSubscriber(emailAddress: lineComponents[2])
+                    let url = lineComponents[0]
+                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
                 case smsKey:
                     guard lineComponents.count == 3, let carrier = Carrier(name: lineComponents[3]) else { return nil }
-                    observers.append(subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier))
+                    let subscriber = subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
+                    let url = lineComponents[0]
+                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
                 case consoleKey:
                     guard lineComponents.count == 2 else { return nil }
-                    observers.append(subject.createConsoleSubscriber())
+                    let subscriber = subject.createConsoleSubscriber()
+                    let url = lineComponents[0]
+                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
                 default:
                     return nil
                 }
