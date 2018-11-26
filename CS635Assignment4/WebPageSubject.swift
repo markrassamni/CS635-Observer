@@ -58,6 +58,7 @@ class WebPageSubject {
             if let error = error {
                 self.subject.onError(error)
             } else if let date = date {
+                self.dateModified = date
                 self.subject.onNext(date)
             }
         }

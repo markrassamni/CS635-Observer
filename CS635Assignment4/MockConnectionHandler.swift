@@ -29,7 +29,7 @@ class MockConnectionHandler: ConnectionProtocol {
             completion(DateError.noMockDates, nil)
             return
         }
-        completion(nil, mockDates[currentDateIndex])
         currentDateIndex += 1
+        completion(nil, mockDates[currentDateIndex-1])
     }
 }
