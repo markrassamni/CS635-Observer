@@ -24,33 +24,15 @@ class WebPageSubject {
     }
     
     func createEmailSubscriber(emailAddress: String) {
-        let _ = subject.subscribe(onNext: { (message) in
-            guard Output().sendEmail(to: emailAddress, message: message) else { return }
-        }, onError: { (error) in
-            guard Output().sendEmail(to: emailAddress, message: error.localizedDescription) else { return }
-        }, onCompleted: {
-            guard Output().sendEmail(to: emailAddress, message: "You will no longer receive updates about \(self.url)") else { return }
-        })
+        Factory.instance.createEmailSubscriber(forSubject: self, sendTo: emailAddress)
     }
     
     func createSMSSubscriber(number: String, carrier: Carrier) {
-        let _ = subject.subscribe(onNext: { (message) in
-            guard Output().sendText(to: number, carrier: carrier, message: message) else { return }
-        }, onError: { (error) in
-            guard Output().sendText(to: number, carrier: carrier, message: error.localizedDescription) else { return }
-        }, onCompleted: {
-            guard Output().sendText(to: number, carrier: carrier, message: "You will no longer receive updates about \(self.url)") else { return }
-        })
+        Factory.instance.createSMSSubscriber(forSubject: self, sendTo: number, carrier: carrier)
     }
     
     func createConsoleSubscriber(){
-        let _ = subject.subscribe(onNext: { (message) in
-            print(message)
-        }, onError: { (error) in
-            print(error.localizedDescription)
-        }, onCompleted: {
-            print("You will no longer receive updates about \(self.url)")
-        })
+        Factory.instance.createConsoleSubscriber(forSubject: self)
     }
     
     func checkForUpdates(connectionHandler: ConnectionProtocol, updated: ((Bool)->())?){

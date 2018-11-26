@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RxSwift
 @testable import CS635Assignment4
 
 class CS635Assignment4Tests: XCTestCase {
@@ -24,7 +25,7 @@ class CS635Assignment4Tests: XCTestCase {
     }
 
     override func tearDown() {
-        
+        super.tearDown()
     }
     
     func createIncrementingMockDates(count: Int) -> [String]{
@@ -33,13 +34,6 @@ class CS635Assignment4Tests: XCTestCase {
             mockDates.append("Date\(index)")
         }
         return mockDates
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        let a = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
-//        Factory().getDateModified(of: a)
     }
     
     func testReadFileSuccessfully(){
@@ -140,6 +134,10 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertEqual(subject?.dateModified, "Date1")
     }
     
+    func testConsoleOutput(){
+        let subject = PublishSubject<String>()
+    }
+    
 //    func testConsoleOutput(){
 //        let factory = Factory()
 //        let subject = factory.createStringPublishSubject()
@@ -148,14 +146,6 @@ class CS635Assignment4Tests: XCTestCase {
 //        subject.onNext("Date 2")
 //
 //    }
-    
-    func testDateNoChange(){
-        // make 2 calls that return the same date, check for no output
-    }
-    
-    func testChangingDate(){
-        // make 2 calls that date changes, check for appropriate output
-    }
     
     // TODO: Mock WebPageSubject class - returns true/f for updates?
     
