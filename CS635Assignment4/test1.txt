@@ -1,0 +1,5 @@
+http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html console
+http://www.eli.sdsu.edu/index.html mail whitney@sdsu.edu
+http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html sms 6195943535 verizon
+http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html sms 6191234567 att
+http://www.eli.sdsu.edu/index.html console

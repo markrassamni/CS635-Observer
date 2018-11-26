@@ -16,32 +16,42 @@ class FileParser {
     private let consoleKey = "console"
     
     /// Boolean returned represents if successfully read all lines
-    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects subjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
+    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
         guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return false }
         let lines: [String]
         do {
             let data = try String(contentsOfFile: filePath, encoding: .utf8).lowercased()
-            var newSubjects = subjects
+            var newSubjects = existingSubjects
+            var newSubjectCount = 0
+            var gotDateCount = 0
             lines = data.components(separatedBy: .newlines)
             for (index, line) in lines.enumerated() {
                 let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
-                guard lineComponents.count > 1 else { return false }
+                guard lineComponents.count > 1 else {
+                    if isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
+                        completion(newSubjects)
+                    }
+                    return index == lines.count - 1
+                }
                 let url = lineComponents[0]
                 switch lineComponents[1]{
                 case emailKey:
                     guard lineComponents.count == 3 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
                         subject.createEmailSubscriber(emailAddress: lineComponents[2])
-                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                        gotDateCount += 1
+                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
                         }
                     } else {
+                        newSubjectCount += 1
                         connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
+                            gotDateCount += 1
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createEmailSubscriber(emailAddress: lineComponents[2])
                             newSubjects.append(subject)
-                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
                             }
                         }
@@ -50,16 +60,19 @@ class FileParser {
                     guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return false }
                     if let subject = newSubjects.subject(forURL: url){
                         subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
-                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                        gotDateCount += 1
+                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
                         }
                     } else {
+                        newSubjectCount += 1
                         connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
+                            gotDateCount += 1
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
                             newSubjects.append(subject)
-                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
                             }
                         }
@@ -68,16 +81,19 @@ class FileParser {
                     guard lineComponents.count == 2 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
                         subject.createConsoleSubscriber()
-                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                        gotDateCount += 1
+                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
                         }
                     } else {
+                        newSubjectCount += 1
                         connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
+                            gotDateCount += 1
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createConsoleSubscriber()
                             newSubjects.append(subject)
-                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
                             }
                         }
@@ -88,6 +104,10 @@ class FileParser {
             }
             return true
         } catch { return false }
+    }
+    
+    private func isFinishedGettingDates(dateCount: Int, lineCount: Int) -> Bool {
+        return dateCount == lineCount - 2 // Have to remove an extra count because last line is empty in XCode txt file
     }
 }
 

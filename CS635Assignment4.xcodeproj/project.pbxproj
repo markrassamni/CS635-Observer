@@ -27,6 +27,7 @@
 		F995120321AC6FA200B00E52 /* MockConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */; };
 		F995120721AC776A00B00E52 /* ConnectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120621AC776A00B00E52 /* ConnectionProtocol.swift */; };
 		F995120921AC7D2700B00E52 /* DateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120821AC7D2700B00E52 /* DateError.swift */; };
+		F995120B21AC7E3B00B00E52 /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = F995120A21AC7E3B00B00E52 /* test1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -80,6 +81,7 @@
 		F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConnectionHandler.swift; sourceTree = "<group>"; };
 		F995120621AC776A00B00E52 /* ConnectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionProtocol.swift; sourceTree = "<group>"; };
 		F995120821AC7D2700B00E52 /* DateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateError.swift; sourceTree = "<group>"; };
+		F995120A21AC7E3B00B00E52 /* test1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */,
 				F995120621AC776A00B00E52 /* ConnectionProtocol.swift */,
 				F995120821AC7D2700B00E52 /* DateError.swift */,
+				F995120A21AC7E3B00B00E52 /* test1.txt */,
 			);
 			path = CS635Assignment4;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F995120B21AC7E3B00B00E52 /* test1.txt in Resources */,
 				F94E66EA21A3B8A600CA850A /* LaunchScreen.storyboard in Resources */,
 				F94E66E721A3B8A600CA850A /* Assets.xcassets in Resources */,
 				F94E66E521A3B8A500CA850A /* Main.storyboard in Resources */,
