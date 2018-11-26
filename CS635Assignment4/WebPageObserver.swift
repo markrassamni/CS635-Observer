@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Alamofire
 
-struct WebPageObserver {
+struct WebPageObserver: Hashable {
     let subject: PublishSubject<String>
     let url: String
     

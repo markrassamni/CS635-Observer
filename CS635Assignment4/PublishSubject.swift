@@ -11,8 +11,8 @@ import RxSwift
 
 extension PublishSubject: Hashable {
     
-    func createEmailSubscriber(emailAddress: String) -> Disposable{
-        return subscribe(onNext: { (message) in
+    func createEmailSubscriber(emailAddress: String) {
+        let _ = subscribe(onNext: { (message) in
             //            guard MFMailComposeViewController.canSendMail() else { return }
             //            let mail = MFMailComposeViewController()
             //            mail.mailComposeDelegate = self
@@ -26,8 +26,8 @@ extension PublishSubject: Hashable {
         })
     }
     
-    func createSMSSubscriber(number: String, carrier: Carrier) -> Disposable {
-        return subscribe(onNext: { (event) in
+    func createSMSSubscriber(number: String, carrier: Carrier) {
+        let _ = subscribe(onNext: { (event) in
             //        guard MFMailComposeViewController.canSendMail() else { return }
             //        let mail = MFMailComposeViewController()
             //        mail.mailComposeDelegate = self
@@ -36,14 +36,14 @@ extension PublishSubject: Hashable {
             //        mail.setMessageBody(message, isHTML: false)
             //        present(mail, animated: true)
         }, onError: { (error) in
-            // TODO: SMS an error
+            // SMS an error
         }, onCompleted: {
             // sms complete
         })
     }
     
-    func createConsoleSubscriber() -> Disposable{
-        return subscribe(onNext: { (message) in
+    func createConsoleSubscriber(){
+        let _ = subscribe(onNext: { (message) in
             print(message)
         }, onError: { (error) in
             print(error.localizedDescription)
