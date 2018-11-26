@@ -10,8 +10,9 @@ import Foundation
 import RxSwift
 
 class Context {
-    // TODO: Change values to a class that will also store the date modified
+    
     private var subjectURLs = [String:PublishSubject<String>]()
+    private var modifiedDateSubjects = [PublishSubject<String>:String]()
     
     func getSubject(forURL url: String) -> PublishSubject<String>? {
         return subjectURLs[url]
@@ -19,5 +20,13 @@ class Context {
     
     func setSubject(forURL url: String, to subject: PublishSubject<String>){
         subjectURLs[url] = subject
+    }
+    
+    func getDate(forSubject subject: PublishSubject<String>) -> String?{
+        return modifiedDateSubjects[subject]
+    }
+    
+    func setDate(forSubject subject: PublishSubject<String>, to date: String){
+        modifiedDateSubjects[subject] = date
     }
 }

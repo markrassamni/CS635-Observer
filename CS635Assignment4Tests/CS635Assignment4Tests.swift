@@ -16,6 +16,9 @@ class CS635Assignment4Tests: XCTestCase {
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        // TODO: Create file parser, pass it a context. Use same context in testing to check for dates modified when calling subject.onNext
+        
     }
 
     override func tearDown() {
@@ -28,6 +31,11 @@ class CS635Assignment4Tests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 //        let a = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
 //        Factory().getDateModified(of: a)
+    }
+    
+    func testFileReadSuccessfully(){
+        // TODO: Implement
+        XCTAssertNotNil(FileParser().readFile(file: "a", context: Context()))
     }
     
     func testReturningADate(){
