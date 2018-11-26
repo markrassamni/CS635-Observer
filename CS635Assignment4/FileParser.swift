@@ -89,55 +89,10 @@ class FileParser {
             return true
         } catch { return false }
     }
-    
-//    private func createEmailSubscriber(lineComponents: [String]){
-//        guard lineComponents.count == 3 else { return }
-//        let url = lineComponents[0]
-//        if let subject = context.getSubject(forURL: url) {
-//            WebPageSubject(subject: subject, url: url, dateModified: <#T##String#>)
-//            subject.createEmailSubscriber(emailAddress: lineComponents[2])
-//            subjects.append(subject)
-//        } else {
-//            let subject = factory.createStringPublishSubject()
-//            context.setSubject(forURL: url, to: subject)
-//            subject.createEmailSubscriber(emailAddress: lineComponents[2])
-//            subjects.append(subject)
-//        }
-//    }
-    
-    private func createSMSSubscriber(line: [String]){
-        
-    }
-    
-    private func createConsoleSubscriber(line: [String]){
-        
-    }
 }
 
-// TODO: Change to class SubjectArray: Array ?
-// And move to new file
-extension Array where Element: WebPageSubject {
-    
+fileprivate extension Array where Element: WebPageSubject {
     mutating func subject(forURL url: String) -> WebPageSubject?{
         return filter{$0.url == url}.first
-        
-        // TODO: Do something like this to create or return the subject
-//        if subject == nil {
-//            subject = PublishSubject<String>()
-//            append(subject)
-//        }
-//        return subject
-    }
-    
-    func contains(subject: PublishSubject<String>) -> Bool {
-        return self.contains { (element) -> Bool in
-            element.subject == subject
-        }
-    }
-    
-    func contains(url: String) -> Bool {
-        return self.contains { (element) -> Bool in
-            element.url == url
-        }
     }
 }
