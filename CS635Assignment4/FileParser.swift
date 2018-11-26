@@ -15,64 +15,79 @@ class FileParser {
     private let smsKey = "sms"
     private let consoleKey = "console"
     
-    // TODO: Do not return if inout?
-    func readFile(file: String, subjects: [WebPageSubject] = [WebPageSubject]()) -> [WebPageSubject]? {
-        guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return nil }
+    /// Boolean returned represents if successfully read all lines
+    func readFile(file: String, existingSubjects subjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
+        guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return false }
         let lines: [String]
         do {
             let data = try String(contentsOfFile: filePath, encoding: .utf8).lowercased()
             var newSubjects = subjects
-            let factory = ReactiveFactory()
             lines = data.components(separatedBy: .newlines)
-            for line in lines {
+            for (index, line) in lines.enumerated() {
                 let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
-                guard lineComponents.count > 1 else { return nil }
+                guard lineComponents.count > 1 else { return false }
                 let url = lineComponents[0]
                 switch lineComponents[1]{
                 case emailKey:
-                    guard lineComponents.count == 3 else { return nil }
+                    guard lineComponents.count == 3 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
                         subject.createEmailSubscriber(emailAddress: lineComponents[2])
+                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            completion(newSubjects)
+                        }
                     } else {
-                        // TODO: Need a completion handler instead of returning bc getting date takes longer than the whole func
                         ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createEmailSubscriber(emailAddress: lineComponents[2])
                             newSubjects.append(subject)
+                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                                completion(newSubjects)
+                            }
                         }
                     }
                 case smsKey:
-                    guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return nil }
-                    
+                    guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return false }
                     if let subject = newSubjects.subject(forURL: url){
                         subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
+                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            completion(newSubjects)
+                        }
                     } else {
                         ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
                             newSubjects.append(subject)
+                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                                completion(newSubjects)
+                            }
                         }
                     }
                 case consoleKey:
-                    guard lineComponents.count == 2 else { return nil }
+                    guard lineComponents.count == 2 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
                         subject.createConsoleSubscriber()
+                        if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                            completion(newSubjects)
+                        }
                     } else {
                         ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createConsoleSubscriber()
                             newSubjects.append(subject)
+                            if newSubjects.count == subjects.count + lines.count && index == lines.count-1 {
+                                completion(newSubjects)
+                            }
                         }
                     }
                 default:
-                    return nil
+                    return false
                 }
             }
-            return newSubjects
-        } catch { return nil }
+            return true
+        } catch { return false }
     }
     
 //    private func createEmailSubscriber(lineComponents: [String]){
