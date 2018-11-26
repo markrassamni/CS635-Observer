@@ -8,8 +8,22 @@
 
 import Foundation
 import RxSwift
+import Alamofire
 
 struct ObserveWebPage {
-    let subscriber: Disposable
+    let subject: PublishSubject<String>
     let url: String
+    
+    func checkForUpdates(url: String, dateUpdated: @escaping (String?)->()){
+        Alamofire.request(url).responseJSON { (response) in
+            switch response.result{
+            case .failure(let error):
+                self.subject.onError(error)
+            case .success:
+                guard let date = response.response?.allHeaderFields["Date"] as? String else { return }
+                // TODO: Compare to previous date
+                self.subject.onNext(date)
+            }
+        }
+    }
 }

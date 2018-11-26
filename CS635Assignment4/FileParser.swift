@@ -9,6 +9,8 @@
 import Foundation
 import RxSwift
 
+// TODO: Each line of the file should check if a subject for that URL exists, if it exists, add subscriber to it, if not create new subject and subscribe to it
+// Pass in a context to read file (var subjectDatesModified = [PublishSubject<String>:String]())
 class FileParser {
     
     private let emailKey = "mail"
@@ -29,19 +31,19 @@ class FileParser {
                 switch lineComponents[1]{
                 case emailKey:
                     guard lineComponents.count == 3 else { return nil }
-                    let subscriber = subject.createEmailSubscriber(emailAddress: lineComponents[2])
+                    let _ = subject.createEmailSubscriber(emailAddress: lineComponents[2])
                     let url = lineComponents[0]
-                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
+                    observers.append(ObserveWebPage(subject: subject, url: url))
                 case smsKey:
                     guard lineComponents.count == 3, let carrier = Carrier(name: lineComponents[3]) else { return nil }
-                    let subscriber = subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
+                    let _ = subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
                     let url = lineComponents[0]
-                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
+                    observers.append(ObserveWebPage(subject: subject, url: url))
                 case consoleKey:
                     guard lineComponents.count == 2 else { return nil }
-                    let subscriber = subject.createConsoleSubscriber()
+                    let _ = subject.createConsoleSubscriber()
                     let url = lineComponents[0]
-                    observers.append(ObserveWebPage(subscriber: subscriber, url: url))
+                    observers.append(ObserveWebPage(subject: subject, url: url))
                 default:
                     return nil
                 }
