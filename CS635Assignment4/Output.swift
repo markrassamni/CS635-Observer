@@ -11,27 +11,29 @@ import MessageUI
 
 class Output: UIViewController, MFMailComposeViewControllerDelegate {
     
-    // TODO: Change back to smtp email
-    func sendEmail(to address: String, message: String){
-        guard MFMailComposeViewController.canSendMail() else { return }
+    func sendEmail(to address: String, message: String) -> Bool {
+        guard MFMailComposeViewController.canSendMail() else { return false }
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
         mail.setToRecipients([address])
         mail.setMessageBody(message, isHTML: false)
         present(mail, animated: true)
+        return true
     }
     
-    func sendText(to number: String, carrier: Carrier, message: String){
-        guard MFMailComposeViewController.canSendMail() else { return }
+    func sendText(to number: String, carrier: Carrier, message: String) -> Bool {
+        guard MFMailComposeViewController.canSendMail() else { return false }
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
         let address = "\(number)@\(carrier.address)"
         mail.setToRecipients([address])
         mail.setMessageBody(message, isHTML: false)
         present(mail, animated: true)
+        return true
     }
     
-    func sendToConsole(message: String){
+    func sendToConsole(message: String) -> Bool {
         print(message)
+        return true
     }
 }

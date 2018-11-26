@@ -10,12 +10,13 @@ import Foundation
 import RxSwift
 import Alamofire
 
-class WebPageSubject: Hashable {
+class WebPageSubject {
     
     let subject: PublishSubject<String>
     let url: String
     var dateModified: String
     
+    // TODO: Also pass in an output/mock subscriber factory
     init(subject: PublishSubject<String>, url: String, dateModified: String) {
         self.subject = subject
         self.url = url
@@ -24,32 +25,21 @@ class WebPageSubject: Hashable {
     
     func createEmailSubscriber(emailAddress: String) {
         let _ = subject.subscribe(onNext: { (message) in
-            //            guard MFMailComposeViewController.canSendMail() else { return }
-            //            let mail = MFMailComposeViewController()
-            //            mail.mailComposeDelegate = self
-            //            mail.setToRecipients([address])
-            //            mail.setMessageBody(message, isHTML: false)
-            //            present(mail, animated: true)
+            guard Output().sendEmail(to: emailAddress, message: message) else { return }
         }, onError: { (error) in
-            // TODO: email error
+            guard Output().sendEmail(to: emailAddress, message: error.localizedDescription) else { return }
         }, onCompleted: {
-            // email complete
+            guard Output().sendEmail(to: emailAddress, message: "You will no longer receive updates about \(self.url)") else { return }
         })
     }
     
     func createSMSSubscriber(number: String, carrier: Carrier) {
-        let _ = subject.subscribe(onNext: { (event) in
-            //        guard MFMailComposeViewController.canSendMail() else { return }
-            //        let mail = MFMailComposeViewController()
-            //        mail.mailComposeDelegate = self
-            //        let address = "\(number)@\(carrier.address)"
-            //        mail.setToRecipients([address])
-            //        mail.setMessageBody(message, isHTML: false)
-            //        present(mail, animated: true)
+        let _ = subject.subscribe(onNext: { (message) in
+            guard Output().sendText(to: number, carrier: carrier, message: message) else { return }
         }, onError: { (error) in
-            // SMS an error
+            guard Output().sendText(to: number, carrier: carrier, message: error.localizedDescription) else { return }
         }, onCompleted: {
-            // sms complete
+            guard Output().sendText(to: number, carrier: carrier, message: "You will no longer receive updates about \(self.url)") else { return }
         })
     }
     
@@ -59,7 +49,7 @@ class WebPageSubject: Hashable {
         }, onError: { (error) in
             print(error.localizedDescription)
         }, onCompleted: {
-            print("\(self) has completed.")
+            print("You will no longer receive updates about \(self.url)")
         })
     }
     
@@ -71,26 +61,5 @@ class WebPageSubject: Hashable {
                 self.subject.onNext(date)
             }
         }
-    }
-    
-    // TODO: Remove hashable?
-    static func == (lhs: WebPageSubject, rhs: WebPageSubject) -> Bool {
-        return lhs.subject == rhs.subject && lhs.url == rhs.url && lhs.dateModified == rhs.dateModified
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(subject)
-        hasher.combine(url)
-        hasher.combine(dateModified)
-    }
-}
-
-extension PublishSubject: Hashable {
-    public static func == (lhs: PublishSubject<Element>, rhs: PublishSubject<Element>) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(hashValue)
     }
 }
