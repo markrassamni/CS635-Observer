@@ -14,8 +14,14 @@ class ConnectionHandler {
     static let instance = ConnectionHandler()
     private init(){}
     
-    func getDateModified(for subject: WebPageObserver, completion: @escaping (Error?, String?)->()){
-        Alamofire.request(subject.url).responseString { (response) in
+    func getDateModified(forSubject subject: WebPageSubject, completion: @escaping (Error?, String?)->()){
+        getDateModified(forURL: subject.url) { (error, date) in
+            completion(error, date)
+        }
+    }
+    
+    func getDateModified(forURL url: String, completion: @escaping (Error?, String?)->()){
+        Alamofire.request(url).responseString { (response) in
             switch response.result{
             case .failure(let error):
                 completion(error, nil)
