@@ -115,8 +115,7 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testMockDateStaysSame(){
-        // TODO: Not completed 
-        let mockConnection = MockConnectionHandler(mockDates: ["Date", "Date"])
+        let mockConnection = MockConnectionHandler(mockDates: ["Date", "Date", "Date1"])
         var subjectCount: Int?
         var subject: WebPageSubject?
         let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection) { (subjects) in
@@ -127,17 +126,18 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertEqual(subjectCount, 1)
         XCTAssertNotNil(subject)
         XCTAssertEqual(subject?.dateModified, "Date")
-//        subject?.checkForUpdates(connectionHandler: mockConnection)
+        var didUpdate: Bool?
+        subject?.checkForUpdates(connectionHandler: mockConnection, updated: { (updated) in
+            didUpdate = updated
+        })
+        XCTAssertFalse(didUpdate!)
         XCTAssertEqual(subject?.dateModified, "Date")
-        var error: Error?
-        var date: String?
-        mockConnection.getDateModified(forSubject: subject!) { (errorResponse, dateResponse) in
-            error = errorResponse
-            date = dateResponse
-        }
-        XCTAssertNotNil(error)
-        XCTAssertNil(date)
-        XCTAssertEqual(error?.localizedDescription, DateError.noMockDates.localizedDescription)
+        didUpdate = nil
+        subject?.checkForUpdates(connectionHandler: mockConnection, updated: { (updated) in
+            didUpdate = updated
+        })
+        XCTAssertTrue(didUpdate!)
+        XCTAssertEqual(subject?.dateModified, "Date1")
     }
     
 //    func testConsoleOutput(){
