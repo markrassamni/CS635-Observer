@@ -23,7 +23,7 @@
 		F94E66E721A3B8A600CA850A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F94E66E621A3B8A600CA850A /* Assets.xcassets */; };
 		F94E66EA21A3B8A600CA850A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E66E821A3B8A600CA850A /* LaunchScreen.storyboard */; };
 		F94E66F521A3B8A600CA850A /* CS635Assignment4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */; };
-		F99511F721AB648E00B00E52 /* ObserveWebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99511F621AB648E00B00E52 /* ObserveWebPage.swift */; };
+		F99511F721AB648E00B00E52 /* WebPageObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99511F621AB648E00B00E52 /* WebPageObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -73,7 +73,7 @@
 		F94E66F021A3B8A600CA850A /* CS635Assignment4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS635Assignment4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS635Assignment4Tests.swift; sourceTree = "<group>"; };
 		F94E66F621A3B8A600CA850A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F99511F621AB648E00B00E52 /* ObserveWebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveWebPage.swift; sourceTree = "<group>"; };
+		F99511F621AB648E00B00E52 /* WebPageObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +153,7 @@
 				0CA6F83E21A873A600FC50B8 /* Factory.swift */,
 				0C09C6B021A9F197009572C8 /* Reactive.swift */,
 				0C09C6B221AA119C009572C8 /* PublishSubject.swift */,
-				F99511F621AB648E00B00E52 /* ObserveWebPage.swift */,
+				F99511F621AB648E00B00E52 /* WebPageObserver.swift */,
 			);
 			path = CS635Assignment4;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F99511F721AB648E00B00E52 /* ObserveWebPage.swift in Sources */,
+				F99511F721AB648E00B00E52 /* WebPageObserver.swift in Sources */,
 				0CA6F83F21A873A600FC50B8 /* Factory.swift in Sources */,
 				0CA6F83D21A7CD9200FC50B8 /* Carrier.swift in Sources */,
 				F94E66E221A3B8A500CA850A /* ViewController.swift in Sources */,

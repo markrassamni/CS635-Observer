@@ -1,5 +1,5 @@
 //
-//  ObserveWebPage.swift
+//  WebPageObserver.swift
 //  CS635Assignment4
 //
 //  Created by Mark Rassamni on 11/25/18.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Alamofire
 
-struct ObserveWebPage {
+struct WebPageObserver {
     let subject: PublishSubject<String>
     let url: String
     
