@@ -12,7 +12,8 @@ import XCTest
 class CS635Assignment4Tests: XCTestCase {
 
     let testURL = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
-    let testFile = "test1.txt"
+    let testFile1 = "test1.txt"
+    let testFile2 = "test2.txt"
     
     let fileParser = FileParser()
     var mockConnection: MockConnectionHandler!
@@ -42,7 +43,7 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testReadFileSuccessfully(){
-        let successfulRead = fileParser.readFile(file: testFile, connectionHandler: mockConnection) { (subjects) in
+        let successfulRead = fileParser.readFile(file: testFile1, connectionHandler: mockConnection) { (subjects) in
             for subject in subjects {
                 subject.checkForUpdates(connectionHandler: self.mockConnection)
             }
@@ -51,14 +52,36 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testSubjectCount(){
-        let expectation = self.expectation(description: "Date Header")
         var subjectsFound: Int?
-        let _ = fileParser.readFile(file: testFile, connectionHandler: mockConnection) { (subjects) in
+        let _ = fileParser.readFile(file: testFile1, connectionHandler: mockConnection) { (subjects) in
             subjectsFound = subjects.count
-            expectation.fulfill()
         }
-        waitForExpectations(timeout: 10, handler: nil)
         XCTAssertEqual(subjectsFound, 2)
+    }
+    
+    func testMockDateChanges(){
+        let mockConnection = MockConnectionHandler(mockDates: createIncrementingMockDates(count: 2))
+        var subjectCount: Int?
+        var subject: WebPageSubject?
+        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection) { (subjects) in
+            subjectCount = subjects.count
+            subject = subjects.first
+        }
+        XCTAssertTrue(success)
+        XCTAssertEqual(subjectCount, 1)
+        XCTAssertNotNil(subject)
+        XCTAssertEqual(subject?.dateModified, "Date0")
+        subject?.checkForUpdates(connectionHandler: mockConnection)
+        XCTAssertEqual(subject?.dateModified, "Date1")
+        var error: Error?
+        var date: String?
+        mockConnection.getDateModified(forSubject: subject!) { (errorResponse, dateResponse) in
+            error = errorResponse
+            date = dateResponse
+        }
+        XCTAssertNotNil(error)
+        XCTAssertNil(date)
+        XCTAssertEqual(error?.localizedDescription, DateError.noMockDates.localizedDescription)
     }
     
 //    func testConsoleOutput(){
@@ -77,6 +100,8 @@ class CS635Assignment4Tests: XCTestCase {
     func testChangingDate(){
         // make 2 calls that date changes, check for appropriate output
     }
+    
+    // TODO: Mock WebPageSubject class - returns true/f for updates?
     
     // TODO: Create test that instead of read file is passed a url etc and does everything with my given parameters
 
