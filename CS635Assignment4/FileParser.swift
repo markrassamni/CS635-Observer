@@ -107,7 +107,7 @@ class FileParser {
     }
     
     private func isFinishedGettingDates(dateCount: Int, lineCount: Int) -> Bool {
-        return dateCount == lineCount - 2 // Have to remove an extra count because last line is empty in XCode txt file
+        return dateCount == lineCount - 1 // Have to remove an extra count because last line is empty in XCode txt file
     }
 }
 
