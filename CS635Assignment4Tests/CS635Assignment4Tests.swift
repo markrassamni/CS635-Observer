@@ -12,18 +12,26 @@ import XCTest
 class CS635Assignment4Tests: XCTestCase {
 
     let testURL = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
+    let testFile = "test1.txt"
     
+    let fileParser = FileParser()
+    var mockConnection: MockConnectionHandler!
     
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // TODO: Create file parser, pass it a context. Use same context in testing to check for dates modified when calling subject.onNext
-        
+        super.setUp()
+        mockConnection = MockConnectionHandler(mockDates: createIncrementingMockDates(count: 50))
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         
+    }
+    
+    func createIncrementingMockDates(count: Int) -> [String]{
+        var mockDates = [String]()
+        for index in 0..<count {
+            mockDates.append("Date\(index)")
+        }
+        return mockDates
     }
 
     func testExample() {
@@ -33,34 +41,34 @@ class CS635Assignment4Tests: XCTestCase {
 //        Factory().getDateModified(of: a)
     }
     
-    func testFileReadSuccessfully(){
-        // TODO: Implement
-        XCTAssertNotNil(FileParser().readFile(file: "a", context: Context()))
+    func testReadFileSuccessfully(){
+        let successfulRead = fileParser.readFile(file: testFile, connectionHandler: mockConnection) { (subjects) in
+            for subject in subjects {
+                subject.checkForUpdates(connectionHandler: self.mockConnection)
+            }
+        }
+        XCTAssertTrue(successfulRead)
     }
     
-    func testReturningADate(){
+    func testSubjectCount(){
         let expectation = self.expectation(description: "Date Header")
-        var date: String?
-        Factory().getDateModified(of: testURL) { (response) in
-            date = response
+        var subjectsFound: Int?
+        let _ = fileParser.readFile(file: testFile, connectionHandler: mockConnection) { (subjects) in
+            subjectsFound = subjects.count
             expectation.fulfill()
         }
         waitForExpectations(timeout: 10, handler: nil)
-        XCTAssertNotNil(date)
+        XCTAssertEqual(subjectsFound, 2)
     }
     
-    func testConsoleOutput(){
-        let factory = Factory()
-        let subject = factory.createStringPublishSubject()
-        let _ = factory.createConsoleSubscriber(subject: subject)
-        subject.onNext("Date 1")
-        subject.onNext("Date 2")
-        
-    }
-    
-    func testObserve(){
-        Factory().testObserve(url: testURL)
-    }
+//    func testConsoleOutput(){
+//        let factory = Factory()
+//        let subject = factory.createStringPublishSubject()
+//        let _ = factory.createConsoleSubscriber(subject: subject)
+//        subject.onNext("Date 1")
+//        subject.onNext("Date 2")
+//
+//    }
     
     func testDateNoChange(){
         // make 2 calls that return the same date, check for no output
@@ -69,12 +77,13 @@ class CS635Assignment4Tests: XCTestCase {
     func testChangingDate(){
         // make 2 calls that date changes, check for appropriate output
     }
+    
+    // TODO: Create test that instead of read file is passed a url etc and does everything with my given parameters
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    // TODO: Factory for connections just returns a data request, caller uses request.responseString
+    // Override response string in mock to return my dates
+    
+    
+    // TODO: Init Subject calls get Date. Subject subject.getDate only calls onNext if subject.date was already initialized (not nil)
 
 }
