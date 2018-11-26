@@ -63,8 +63,8 @@ class WebPageSubject: Hashable {
         })
     }
     
-    func checkForUpdates(){
-        ConnectionHandler.instance.getDateModified(forSubject: self) { (error, date) in
+    func checkForUpdates(connectionHandler: ConnectionProtocol){
+        connectionHandler.getDateModified(forSubject: self) { (error, date) in
             if let error = error {
                 self.subject.onError(error)
             } else if let date = date {

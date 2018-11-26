@@ -9,10 +9,7 @@
 import Foundation
 import Alamofire
 
-class ConnectionHandler {
-    
-    static let instance = ConnectionHandler()
-    private init(){}
+class ConnectionHandler: ConnectionProtocol {
     
     func getDateModified(forSubject subject: WebPageSubject, completion: @escaping (Error?, String?)->()){
         getDateModified(forURL: subject.url) { (error, date) in
@@ -33,15 +30,5 @@ class ConnectionHandler {
                 completion(nil, date)
             }
         }
-    }
-}
-
-fileprivate struct DateError: LocalizedError {
-    
-    private var description: String
-    static let noDate = DateError(description: NSLocalizedString("Could not retrieve date from header field.",comment: ""))
-    
-    var errorDescription: String? {
-        return description
     }
 }

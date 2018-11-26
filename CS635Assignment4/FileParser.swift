@@ -16,7 +16,7 @@ class FileParser {
     private let consoleKey = "console"
     
     /// Boolean returned represents if successfully read all lines
-    func readFile(file: String, existingSubjects subjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
+    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects subjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
         guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return false }
         let lines: [String]
         do {
@@ -36,7 +36,7 @@ class FileParser {
                             completion(newSubjects)
                         }
                     } else {
-                        ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
+                        connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createEmailSubscriber(emailAddress: lineComponents[2])
@@ -54,7 +54,7 @@ class FileParser {
                             completion(newSubjects)
                         }
                     } else {
-                        ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
+                        connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
@@ -72,7 +72,7 @@ class FileParser {
                             completion(newSubjects)
                         }
                     } else {
-                        ConnectionHandler.instance.getDateModified(forURL: url) { (error, date) in
+                        connectionHandler.getDateModified(forURL: url) { (error, date) in
                             guard error == nil, let date = date else { return }
                             let subject = WebPageSubject(subject: PublishSubject<String>(), url: url, dateModified: date)
                             subject.createConsoleSubscriber()
