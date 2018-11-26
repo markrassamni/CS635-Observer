@@ -53,13 +53,25 @@ class WebPageSubject {
         })
     }
     
-    func checkForUpdates(connectionHandler: ConnectionProtocol){
+    func checkForUpdates(connectionHandler: ConnectionProtocol, updated: ((Bool)->())?){
         connectionHandler.getDateModified(forSubject: self) { (error, date) in
             if let error = error {
                 self.subject.onError(error)
+                if updated != nil {
+                    updated!(false)
+                }
             } else if let date = date {
-                self.dateModified = date
-                self.subject.onNext(date)
+                if date != self.dateModified {
+                    self.dateModified = date
+                    self.subject.onNext(date)
+                    if updated != nil {
+                        updated!(true)
+                    }
+                } else {
+                    if updated != nil {
+                        updated!(false)
+                    }
+                }
             }
         }
     }
