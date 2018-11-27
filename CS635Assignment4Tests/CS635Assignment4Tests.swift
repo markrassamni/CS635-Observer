@@ -144,9 +144,9 @@ class CS635Assignment4Tests: XCTestCase {
         Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: "me")
         //create like this for mock:
         
-        subject.subject.subscribe(onNext: { (date) in
-            
-        }, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//        subject.subject.subscribe(onNext: { (date) in
+//            
+//        }, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
         
         
         // TODO: Factory and mock factory. createEmailSubscriber on Factory protocol, calls correct method.
@@ -161,15 +161,4 @@ class CS635Assignment4Tests: XCTestCase {
 //        subject.onNext("Date 2")
 //
 //    }
-    
-    // TODO: Mock WebPageSubject class - returns true/f for updates?
-    
-    // TODO: Create test that instead of read file is passed a url etc and does everything with my given parameters
-
-    // TODO: Factory for connections just returns a data request, caller uses request.responseString
-    // Override response string in mock to return my dates
-    
-    
-    // TODO: Init Subject calls get Date. Subject subject.getDate only calls onNext if subject.date was already initialized (not nil)
-
 }

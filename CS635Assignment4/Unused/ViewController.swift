@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     func test1(){
         let _ = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
-        let b = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
+        let _ = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
 //        Factory().getDateModified(of: b) { (date) in
 //            guard let date = date else { return }
 //            print(date)
