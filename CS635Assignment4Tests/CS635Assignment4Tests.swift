@@ -137,12 +137,12 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testConsoleOutput(){
-        let _ = ReactiveFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        let _ = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
     }
     
     func testSubscriber(){
-        let subject = ReactiveFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        ReactiveFactory.instance.createEmailSubscriber(forSubject: subject, sendTo: "me", sender: mockSender)
+        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        subject.createEmailSubscriber(sendTo: "me", sender: mockSender)
         //create like this for mock:
         
 //        subject.subject.subscribe(onNext: { (date) in

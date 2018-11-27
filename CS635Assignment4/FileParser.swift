@@ -77,13 +77,13 @@ class FileParser {
         let url = lineComponents[0]
         let email = lineComponents[2]
         if let subject = subjects.subject(forURL: url) {
-            ReactiveFactory.instance.createEmailSubscriber(forSubject: subject, sendTo: email, sender: sender)
+            subject.createEmailSubscriber(sendTo: email, sender: sender)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
-                let subject = ReactiveFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                ReactiveFactory.instance.createEmailSubscriber(forSubject: subject, sendTo: email, sender: sender)
+                let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
+                subject.createEmailSubscriber(sendTo: email, sender: sender)
                 newSubject(subject)
             }
         }
@@ -93,13 +93,13 @@ class FileParser {
         let url = lineComponents[0]
         let number = lineComponents[2]
         if let subject = subjects.subject(forURL: url){
-            ReactiveFactory.instance.createSMSSubscriber(forSubject: subject, sendTo: number, carrier: carrier, sender: sender)
+            subject.createSMSSubscriber(sendTo: number, carrier: carrier, sender: sender)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
-                let subject = ReactiveFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                ReactiveFactory.instance.createSMSSubscriber(forSubject: subject, sendTo: number, carrier: carrier, sender: sender)
+                let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
+                subject.createSMSSubscriber(sendTo: number, carrier: carrier, sender: sender)
                 newSubject(subject)
             }
         }
@@ -108,14 +108,14 @@ class FileParser {
     private func handleConsoleKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()){
         let url = lineComponents[0]
         if let subject = subjects.subject(forURL: url) {
-            ReactiveFactory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
+            subject.createConsoleSubscriber(sender: sender)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
-                let subject = ReactiveFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                ReactiveFactory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
-               newSubject(subject)
+                let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
+                subject.createConsoleSubscriber(sender: sender)
+                newSubject(subject)
             }
         }
     }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8AAD5C21A7451A00401DAB /* FileParser.swift */; };
 		0CA6F83D21A7CD9200FC50B8 /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */; };
-		0CA6F83F21A873A600FC50B8 /* ReactiveFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA6F83E21A873A600FC50B8 /* ReactiveFactory.swift */; };
+		0CA6F83F21A873A600FC50B8 /* SubjectFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA6F83E21A873A600FC50B8 /* SubjectFactory.swift */; };
 		490033E36B2BD34277062B64 /* Pods_CS635Assignment4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D760A2C74FB164664352C4DD /* Pods_CS635Assignment4.framework */; };
 		6CE946C47CA740489D509968 /* Pods_CS635Assignment4Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73A33D59708838C573BB0BF /* Pods_CS635Assignment4Tests.framework */; };
 		F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66DF21A3B8A500CA850A /* AppDelegate.swift */; };
@@ -55,7 +55,7 @@
 /* Begin PBXFileReference section */
 		0C8AAD5C21A7451A00401DAB /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
 		0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
-		0CA6F83E21A873A600FC50B8 /* ReactiveFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveFactory.swift; sourceTree = "<group>"; };
+		0CA6F83E21A873A600FC50B8 /* SubjectFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFactory.swift; sourceTree = "<group>"; };
 		54C9A07C2DDE0649B52D1530 /* Pods-CS635Assignment4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.debug.xcconfig"; sourceTree = "<group>"; };
 		A1B0169650C8A0FED4E717CC /* Pods-CS635Assignment4Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4Tests/Pods-CS635Assignment4Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A59569127D42992235733723 /* Pods-CS635Assignment4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS635Assignment4.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS635Assignment4/Pods-CS635Assignment4.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				0C8AAD5C21A7451A00401DAB /* FileParser.swift */,
 				F951D1CD21ACC32300CE7CCF /* UpdatesViewController.swift */,
 				0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */,
-				0CA6F83E21A873A600FC50B8 /* ReactiveFactory.swift */,
+				0CA6F83E21A873A600FC50B8 /* SubjectFactory.swift */,
 				F951D1DF21AD2FD900CE7CCF /* OutputFactory.swift */,
 				F99511F621AB648E00B00E52 /* WebPageSubject.swift */,
 				F995120021AB966800B00E52 /* ConnectionHandler.swift */,
@@ -429,7 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99511F721AB648E00B00E52 /* WebPageSubject.swift in Sources */,
-				0CA6F83F21A873A600FC50B8 /* ReactiveFactory.swift in Sources */,
+				0CA6F83F21A873A600FC50B8 /* SubjectFactory.swift in Sources */,
 				0CA6F83D21A7CD9200FC50B8 /* Carrier.swift in Sources */,
 				0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */,
 				F951D1DC21AD1AA800CE7CCF /* MockSender.swift in Sources */,
