@@ -8,6 +8,7 @@
 
 import XCTest
 import RxSwift
+import RxTest
 @testable import CS635Assignment4
 
 class CS635Assignment4Tests: XCTestCase {
@@ -135,7 +136,21 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testConsoleOutput(){
-        let subject = PublishSubject<String>()
+        let subject = Factory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+    }
+    
+    func testSubscriber(){
+        let subject = Factory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: "me")
+        //create like this for mock:
+        
+        subject.subject.subscribe(onNext: { (date) in
+            
+        }, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+        
+        
+        // TODO: Factory and mock factory. createEmailSubscriber on Factory protocol, calls correct method.
+        
     }
     
 //    func testConsoleOutput(){
