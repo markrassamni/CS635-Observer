@@ -31,19 +31,16 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
         }
     }
     
-    func sendMail(mailVC: MailViewController) -> MailViewController? {
+    func sendMail(mailVC: MailViewController) {
         presentMailViewController(mailVC: mailVC, presented: nil)
-        return nil
     }
     
-    func sendText(textVC: MailViewController) -> MailViewController? {
+    func sendText(textVC: MailViewController) {
         presentMailViewController(mailVC: textVC, presented: nil)
-        return nil
     }
     
-    func sendConsole(output: String) -> String? {
+    func sendConsole(output: String) {
         print(output)
-        return nil
     }
     
     func presentMailViewController(mailVC: MailViewController, presented: (()->())?){

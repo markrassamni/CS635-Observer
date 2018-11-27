@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SenderProtocol {
-    func sendMail(mailVC: MailViewController) -> MailViewController?
-    func sendText(textVC: MailViewController) -> MailViewController?
-    func sendConsole(output: String) -> String?
+    func sendMail(mailVC: MailViewController)
+    func sendText(textVC: MailViewController)
+    func sendConsole(output: String)
 }

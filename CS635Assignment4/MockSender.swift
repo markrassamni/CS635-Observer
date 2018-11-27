@@ -14,19 +14,16 @@ class MockSender: SenderProtocol {
     private var textVC: MailViewController?
     private var consoleOutput: String?
     
-    func sendMail(mailVC: MailViewController) -> MailViewController? {
+    func sendMail(mailVC: MailViewController) {
         self.mailVC = mailVC
-        return mailVC
     }
     
-    func sendText(textVC: MailViewController) -> MailViewController? {
+    func sendText(textVC: MailViewController){
         self.textVC = textVC
-        return textVC
     }
     
-    func sendConsole(output: String) -> String? {
+    func sendConsole(output: String){
         self.consoleOutput = output
-        return output
     }
     
     func getMailVC() -> MailViewController? {
