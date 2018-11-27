@@ -10,10 +10,10 @@ import Foundation
 
 struct DateError: LocalizedError {
     
-    private var description: String
     static let noDate = DateError(description: "Could not retrieve date from header field.")
     static let noMockDates = DateError(description: "All mocked dates have been returned.")
-    
+    private var description: String
+
     var errorDescription: String? {
         return description
     }
