@@ -1,5 +1,5 @@
 //
-//  UpdatesViewController.swift
+//  OutputViewController.swift
 //  CS635Assignment4
 //
 //  Created by Mark Rassamni on 11/26/18.
@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelegate, SenderProtocol {
+class OutputViewController: UIViewController, MFMailComposeViewControllerDelegate, SenderProtocol {
 
     var timer: Timer?
     var subjects: [WebPageSubject]?
