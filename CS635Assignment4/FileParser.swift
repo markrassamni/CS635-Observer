@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+// TODO: Check all files for imports to remove
 
 class FileParser {
     
@@ -22,80 +23,48 @@ class FileParser {
         do {
             let data = try String(contentsOfFile: filePath, encoding: .utf8).lowercased()
             var newSubjects = existingSubjects
-            var newSubjectCount = 0
-            var gotDateCount = 0
+            var linesHandled = 0
             lines = data.components(separatedBy: .newlines)
             for (index, line) in lines.enumerated() {
                 let lineComponents = line.components(separatedBy: " ").filter{ $0 != "" }
                 guard lineComponents.count > 1 else {
-                    if isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
+                    if isFinishedGettingDates(linesHandled: linesHandled, lineCount: lines.count){
                         completion(newSubjects)
                     }
                     return index == lines.count - 1
                 }
-                let url = lineComponents[0]
                 switch lineComponents[1]{
                 case emailKey:
                     guard lineComponents.count == 3 else { return false }
-                    if let subject = newSubjects.subject(forURL: url) {
-                        Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: lineComponents[2], sender: sender)
-                        gotDateCount += 1
-                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                            completion(newSubjects)
-                        }
-                    } else {
-                        newSubjectCount += 1
-                        connectionHandler.getDateModified(forURL: url) { (error, date) in
-                            guard error == nil, let date = date else { return }
-                            gotDateCount += 1
-                            let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: lineComponents[2], sender: sender)
+                    handleEmailKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                        linesHandled += 1
+                        if let subject = newSubject {
                             newSubjects.append(subject)
-                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                                completion(newSubjects)
-                            }
+                        }
+                        if self.isFinishedGettingDates(linesHandled: linesHandled, lineCount: lines.count) {
+                            completion(newSubjects)
                         }
                     }
                 case smsKey:
                     guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return false }
-                    if let subject = newSubjects.subject(forURL: url){
-                        Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: lineComponents[2], carrier: carrier, sender: sender)
-                        gotDateCount += 1
-                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                            completion(newSubjects)
-                        }
-                    } else {
-                        newSubjectCount += 1
-                        connectionHandler.getDateModified(forURL: url) { (error, date) in
-                            guard error == nil, let date = date else { return }
-                            gotDateCount += 1
-                            let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: lineComponents[2], carrier: carrier, sender: sender)
+                    handleSMSKey(lineComponents: lineComponents, subjects: newSubjects, carrier: carrier, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                        linesHandled += 1
+                        if let subject = newSubject {
                             newSubjects.append(subject)
-                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                                completion(newSubjects)
-                            }
+                        }
+                        if self.isFinishedGettingDates(linesHandled: linesHandled, lineCount: lines.count) {
+                            completion(newSubjects)
                         }
                     }
                 case consoleKey:
                     guard lineComponents.count == 2 else { return false }
-                    if let subject = newSubjects.subject(forURL: url) {
-                        Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
-                        gotDateCount += 1
-                        if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                            completion(newSubjects)
-                        }
-                    } else {
-                        newSubjectCount += 1
-                        connectionHandler.getDateModified(forURL: url) { (error, date) in
-                            guard error == nil, let date = date else { return }
-                            gotDateCount += 1
-                            let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
+                    handleConsoleKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                        linesHandled += 1
+                        if let subject = newSubject {
                             newSubjects.append(subject)
-                            if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
-                                completion(newSubjects)
-                            }
+                        }
+                        if self.isFinishedGettingDates(linesHandled: linesHandled, lineCount: lines.count) {
+                            completion(newSubjects)
                         }
                     }
                 default:
@@ -106,13 +75,60 @@ class FileParser {
         } catch { return false }
     }
     
-    private func isFinishedGettingDates(dateCount: Int, lineCount: Int) -> Bool {
-        return dateCount == lineCount - 1 // Have to remove an extra count because last line is empty in XCode txt file
+    private func handleEmailKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()) {
+        let url = lineComponents[0]
+        let email = lineComponents[2]
+        if let subject = subjects.subject(forURL: url) {
+            Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: email, sender: sender)
+            newSubject(nil)
+        } else {
+            connectionHandler.getDateModified(forURL: url) { (error, date) in
+                guard error == nil, let date = date else { return }
+                let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
+                Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: email, sender: sender)
+                newSubject(subject)
+            }
+        }
+    }
+    
+    private func handleSMSKey(lineComponents: [String], subjects: [WebPageSubject], carrier: Carrier, connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()){
+        let url = lineComponents[0]
+        let number = lineComponents[2]
+        if let subject = subjects.subject(forURL: url){
+            Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: number, carrier: carrier, sender: sender)
+            newSubject(nil)
+        } else {
+            connectionHandler.getDateModified(forURL: url) { (error, date) in
+                guard error == nil, let date = date else { return }
+                let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
+                Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: number, carrier: carrier, sender: sender)
+                newSubject(subject)
+            }
+        }
+    }
+    
+    private func handleConsoleKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()){
+        let url = lineComponents[0]
+        if let subject = subjects.subject(forURL: url) {
+            Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
+            newSubject(nil)
+        } else {
+            connectionHandler.getDateModified(forURL: url) { (error, date) in
+                guard error == nil, let date = date else { return }
+                let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
+                Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
+               newSubject(subject)
+            }
+        }
+    }
+    
+    private func isFinishedGettingDates(linesHandled: Int, lineCount: Int) -> Bool {
+        return linesHandled == lineCount - 1 // Have to remove an extra count because last line is empty in XCode txt file
     }
 }
 
 fileprivate extension Array where Element: WebPageSubject {
-    mutating func subject(forURL url: String) -> WebPageSubject?{
+    func subject(forURL url: String) -> WebPageSubject? {
         return filter{$0.url == url}.first
     }
 }
