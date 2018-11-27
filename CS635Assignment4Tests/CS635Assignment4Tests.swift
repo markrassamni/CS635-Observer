@@ -137,7 +137,7 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testConsoleOutput(){
-        let subject = Factory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        let _ = Factory.instance.createWebPageSubject(url: testURL, dateModified: "date")
     }
     
     func testSubscriber(){
