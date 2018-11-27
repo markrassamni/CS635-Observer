@@ -22,6 +22,7 @@
 		F951D1DC21AD1AA800CE7CCF /* MockSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1DB21AD1AA800CE7CCF /* MockSender.swift */; };
 		F951D1E021AD2FD900CE7CCF /* OutputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1DF21AD2FD900CE7CCF /* OutputFactory.swift */; };
 		F971701D21AD44E7003899FB /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971701C21AD44E7003899FB /* MailViewController.swift */; };
+		F971701F21ADDC3D003899FB /* TestMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971701E21ADDC3D003899FB /* TestMailViewController.swift */; };
 		F99511F721AB648E00B00E52 /* WebPageSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99511F621AB648E00B00E52 /* WebPageSubject.swift */; };
 		F995120121AB966800B00E52 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120021AB966800B00E52 /* ConnectionHandler.swift */; };
 		F995120321AC6FA200B00E52 /* MockConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */; };
@@ -77,6 +78,7 @@
 		F951D1DB21AD1AA800CE7CCF /* MockSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSender.swift; sourceTree = "<group>"; };
 		F951D1DF21AD2FD900CE7CCF /* OutputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFactory.swift; sourceTree = "<group>"; };
 		F971701C21AD44E7003899FB /* MailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
+		F971701E21ADDC3D003899FB /* TestMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMailViewController.swift; sourceTree = "<group>"; };
 		F99511F621AB648E00B00E52 /* WebPageSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageSubject.swift; sourceTree = "<group>"; };
 		F995120021AB966800B00E52 /* ConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
 		F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConnectionHandler.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */,
 				F94E66F621A3B8A600CA850A /* Info.plist */,
+				F971701E21ADDC3D003899FB /* TestMailViewController.swift */,
 			);
 			path = CS635Assignment4Tests;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94E66F521A3B8A600CA850A /* CS635Assignment4Tests.swift in Sources */,
+				F971701F21ADDC3D003899FB /* TestMailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

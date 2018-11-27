@@ -136,44 +136,6 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertEqual(subject?.dateModified, "Date1")
     }
     
-    
-    // Test must be ran on a device and this code must be placed in an active view controller class. Replace XCTAssert with assert
-    func testEmailOutput(){
-        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        let recipient = "test"
-        subject.createEmailSubscriber(sendTo: recipient, sender: mockSender)
-        subject.subject.onNext("newDate")
-        guard let mailVC = mockSender.getMailVC() else {
-            XCTAssertTrue(false)
-            return
-        }
-        let expected = MailViewController()
-        expected.setSubject("Webpage updated")
-        expected.setToRecipients([recipient])
-        let message = "Web page \(subject.url) has been updated at \(subject.dateModified)"
-        expected.setMessageBody(message, isHTML: false)
-        let areEqual = mailVC == expected
-        XCTAssertTrue(areEqual)
-    }
-    
-    // Test must be ran on a device and this code must be placed in an active view controller class. Replace XCTAssert with assert
-    func testTextOutput(){
-        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        subject.createSMSSubscriber(sendTo: "test", carrier: Carrier(name: "att")!, sender: mockSender)
-        subject.subject.onNext("newDate")
-        guard let textVC = mockSender.getTextVC() else {
-            XCTAssertTrue(false)
-            return
-        }
-        let expected = MailViewController()
-        expected.setSubject("Webpage updated")
-        expected.setToRecipients(["test@mms.att.net"])
-        let message = "Web page \(subject.url) has been updated at \(subject.dateModified)"
-        expected.setMessageBody(message, isHTML: false)
-        let areEqual = expected == textVC
-        XCTAssertTrue(areEqual)
-    }
-    
     func testConsoleOutput(){
         let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
         subject.createConsoleSubscriber(sender: mockSender)
@@ -208,4 +170,7 @@ class CS635Assignment4Tests: XCTestCase {
 //        subject.onNext("Date 2")
 //
 //    }
+    // TODO: Go through all classes and remove extra vars
 }
+
+
