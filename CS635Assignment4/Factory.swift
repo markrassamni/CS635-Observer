@@ -10,9 +10,7 @@ import Foundation
 import RxSwift
 import MessageUI
 
-class Factory {
-    
-    // TODO: Create factory protocol, pass it into file parser etc. This is base factory, create new mockfact that returns values instead of performing mail sms etc
+class Factory { // TODO: Separate into reactive and output factory
     
     private init(){}
     static let instance = Factory()
@@ -29,8 +27,6 @@ class Factory {
         let _ = subject.subject.subscribe(onNext: { (message) in
             let mailVC = self.createEmail(to: emailAddress, message: "Web page \(subject.url) has been updated at \(subject.dateModified)")
             let _ = sender.sendMail(mailVC: mailVC)
-            // TODO: Call sender. send email - sender is new protocol can be mocked?
-            // if cannot get prot to work send here to UpdateVC and only use create for testing
         }, onError: { (error) in
             let mailVC = self.createEmail(to: emailAddress, message: error.localizedDescription)
             let _ = sender.sendMail(mailVC: mailVC)
