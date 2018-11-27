@@ -9,8 +9,8 @@
 import UIKit
 import MessageUI
 
-class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelegate {
-    
+class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelegate, SenderProtocol {
+
     var timer: Timer?
     var subjects: [WebPageSubject]?
     var connectionHandler: ConnectionHandler?
@@ -18,9 +18,9 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // TODO: Parse file and set vars
     }
     // TODO: Implement this class
-    // Factory : createEmail(to: emailAddress, message: "Web page \(subject.url) has been updated at \(subject.dateModified)")
     
     func beginCheckingForUpdates(onSubjects subjects: [WebPageSubject], every timeInterval: TimeInterval, onConnection connectionHandler: ConnectionHandler){
         timer?.invalidate()
@@ -42,30 +42,28 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
         }
     }
     
-    func presentMailViewController(mailVC: MFMailComposeViewController){
-        present(mailVC, animated: true, completion: nil)
+    func presentMailViewController(mailVC: MFMailComposeViewController, presented: (()->())?){
+        guard MFMailComposeViewController.canSendMail() else { return }
+        mailVC.mailComposeDelegate = self
+        self.present(mailVC, animated: true) {
+            if presented != nil {
+                presented!()
+            }
+        }
     }
     
-    func sendEmail(to address: String, message: String) -> MFMailComposeViewController? {
-        guard MFMailComposeViewController.canSendMail() else { return nil }
-        let mail = MFMailComposeViewController()
-        mail.setToRecipients([address])
-        mail.setMessageBody(message, isHTML: false)
-        return mail
+    func sendMail(mailVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+        presentMailViewController(mailVC: mailVC, presented: nil)
+        return nil
     }
     
-    func sendText(to number: String, carrier: Carrier, message: String) -> MFMailComposeViewController? {
-        guard MFMailComposeViewController.canSendMail() else { return nil }
-        let mail = MFMailComposeViewController()
-        let address = "\(number)@\(carrier.address)"
-        mail.setToRecipients([address])
-        mail.setMessageBody(message, isHTML: false)
-        return mail
+    func sendText(textVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+        presentMailViewController(mailVC: textVC, presented: nil)
+        return nil
     }
     
-    func sendToConsole(message: String) -> String {
-        return message
+    func sendConsole(output: String) -> String? {
+        print(output)
+        return nil
     }
-    
-
 }

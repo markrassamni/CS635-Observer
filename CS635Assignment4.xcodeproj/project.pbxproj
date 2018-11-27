@@ -21,6 +21,8 @@
 		F94E66EA21A3B8A600CA850A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E66E821A3B8A600CA850A /* LaunchScreen.storyboard */; };
 		F94E66F521A3B8A600CA850A /* CS635Assignment4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */; };
 		F951D1CE21ACC32300CE7CCF /* UpdatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1CD21ACC32300CE7CCF /* UpdatesViewController.swift */; };
+		F951D1D821AD1A8F00CE7CCF /* SenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */; };
+		F951D1DC21AD1AA800CE7CCF /* MockSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1DB21AD1AA800CE7CCF /* MockSender.swift */; };
 		F99511F721AB648E00B00E52 /* WebPageSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99511F621AB648E00B00E52 /* WebPageSubject.swift */; };
 		F995120121AB966800B00E52 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120021AB966800B00E52 /* ConnectionHandler.swift */; };
 		F995120321AC6FA200B00E52 /* MockConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */; };
@@ -75,6 +77,8 @@
 		F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS635Assignment4Tests.swift; sourceTree = "<group>"; };
 		F94E66F621A3B8A600CA850A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F951D1CD21ACC32300CE7CCF /* UpdatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesViewController.swift; sourceTree = "<group>"; };
+		F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderProtocol.swift; sourceTree = "<group>"; };
+		F951D1DB21AD1AA800CE7CCF /* MockSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSender.swift; sourceTree = "<group>"; };
 		F99511F621AB648E00B00E52 /* WebPageSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageSubject.swift; sourceTree = "<group>"; };
 		F995120021AB966800B00E52 /* ConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
 		F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConnectionHandler.swift; sourceTree = "<group>"; };
@@ -149,7 +153,6 @@
 			children = (
 				0C8AAD5C21A7451A00401DAB /* FileParser.swift */,
 				F951D1CD21ACC32300CE7CCF /* UpdatesViewController.swift */,
-				0C5FFE6021A7B69800C87F0A /* Output.swift */,
 				0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */,
 				0CA6F83E21A873A600FC50B8 /* Factory.swift */,
 				F99511F621AB648E00B00E52 /* WebPageSubject.swift */,
@@ -157,6 +160,8 @@
 				F995120221AC6FA200B00E52 /* MockConnectionHandler.swift */,
 				F995120621AC776A00B00E52 /* ConnectionProtocol.swift */,
 				F995120821AC7D2700B00E52 /* DateError.swift */,
+				F951D1DB21AD1AA800CE7CCF /* MockSender.swift */,
+				F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */,
 				F951D1D021ACC3AC00CE7CCF /* Test Files */,
 				F94E66EB21A3B8A600CA850A /* Info.plist */,
 				F951D1CF21ACC39700CE7CCF /* Unused */,
@@ -176,9 +181,10 @@
 		F951D1CF21ACC39700CE7CCF /* Unused */ = {
 			isa = PBXGroup;
 			children = (
+				0C5FFE6021A7B69800C87F0A /* Output.swift */,
 				0C8AAD5E21A74D7600401DAB /* OutputType.swift */,
-				F94E66DF21A3B8A500CA850A /* AppDelegate.swift */,
 				F94E66E121A3B8A500CA850A /* ViewController.swift */,
+				F94E66DF21A3B8A500CA850A /* AppDelegate.swift */,
 				F94E66E321A3B8A500CA850A /* Main.storyboard */,
 				F94E66E621A3B8A600CA850A /* Assets.xcassets */,
 				F94E66E821A3B8A600CA850A /* LaunchScreen.storyboard */,
@@ -433,6 +439,7 @@
 				0CA6F83D21A7CD9200FC50B8 /* Carrier.swift in Sources */,
 				F94E66E221A3B8A500CA850A /* ViewController.swift in Sources */,
 				0C8AAD5D21A7451A00401DAB /* FileParser.swift in Sources */,
+				F951D1DC21AD1AA800CE7CCF /* MockSender.swift in Sources */,
 				F94E66E021A3B8A500CA850A /* AppDelegate.swift in Sources */,
 				F995120321AC6FA200B00E52 /* MockConnectionHandler.swift in Sources */,
 				F995120121AB966800B00E52 /* ConnectionHandler.swift in Sources */,
@@ -440,6 +447,7 @@
 				F995120721AC776A00B00E52 /* ConnectionProtocol.swift in Sources */,
 				F951D1CE21ACC32300CE7CCF /* UpdatesViewController.swift in Sources */,
 				F995120921AC7D2700B00E52 /* DateError.swift in Sources */,
+				F951D1D821AD1A8F00CE7CCF /* SenderProtocol.swift in Sources */,
 				0C8AAD5F21A74D7600401DAB /* OutputType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

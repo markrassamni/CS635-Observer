@@ -16,23 +16,10 @@ class WebPageSubject {
     let url: String
     var dateModified: String
     
-    // TODO: Also pass in an output/mock subscriber factory
     init(subject: PublishSubject<String>, url: String, dateModified: String) {
         self.subject = subject
         self.url = url
         self.dateModified = dateModified
-    }
-    
-    func createEmailSubscriber(emailAddress: String) {
-        Factory.instance.createEmailSubscriber(forSubject: self, sendTo: emailAddress)
-    }
-    
-    func createSMSSubscriber(number: String, carrier: Carrier) {
-        Factory.instance.createSMSSubscriber(forSubject: self, sendTo: number, carrier: carrier)
-    }
-    
-    func createConsoleSubscriber(){
-        Factory.instance.createConsoleSubscriber(forSubject: self)
     }
     
     func checkForUpdates(connectionHandler: ConnectionProtocol, updated: ((Bool)->())?){

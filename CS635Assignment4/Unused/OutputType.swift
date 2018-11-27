@@ -6,10 +6,10 @@
 //  Copyright © 2018 Mark Rassamni. All rights reserved.
 //
 
-import Foundation
-
-enum OutputType {
-    case sms
-    case console
-    case mail
-}
+//import Foundation
+//
+//enum OutputType {
+//    case sms
+//    case console
+//    case mail
+//}

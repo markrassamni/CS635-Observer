@@ -16,7 +16,7 @@ class FileParser {
     private let consoleKey = "console"
     
     /// Boolean returned represents if successfully read all lines. Completion returns the array of subjects created
-    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects: [WebPageSubject] = [WebPageSubject](), completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
+    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects: [WebPageSubject] = [WebPageSubject](), sender: SenderProtocol, completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
         guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return false }
         let lines: [String]
         do {
@@ -38,7 +38,7 @@ class FileParser {
                 case emailKey:
                     guard lineComponents.count == 3 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
-                        subject.createEmailSubscriber(emailAddress: lineComponents[2])
+                        Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: lineComponents[2], sender: sender)
                         gotDateCount += 1
                         if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
@@ -49,7 +49,7 @@ class FileParser {
                             guard error == nil, let date = date else { return }
                             gotDateCount += 1
                             let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            subject.createEmailSubscriber(emailAddress: lineComponents[2])
+                            Factory.instance.createEmailSubscriber(forSubject: subject, sendTo: lineComponents[2], sender: sender)
                             newSubjects.append(subject)
                             if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
@@ -59,7 +59,7 @@ class FileParser {
                 case smsKey:
                     guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return false }
                     if let subject = newSubjects.subject(forURL: url){
-                        subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
+                        Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: lineComponents[2], carrier: carrier, sender: sender)
                         gotDateCount += 1
                         if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
@@ -70,7 +70,7 @@ class FileParser {
                             guard error == nil, let date = date else { return }
                             gotDateCount += 1
                             let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            subject.createSMSSubscriber(number: lineComponents[2], carrier: carrier)
+                            Factory.instance.createSMSSubscriber(forSubject: subject, sendTo: lineComponents[2], carrier: carrier, sender: sender)
                             newSubjects.append(subject)
                             if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
@@ -80,7 +80,7 @@ class FileParser {
                 case consoleKey:
                     guard lineComponents.count == 2 else { return false }
                     if let subject = newSubjects.subject(forURL: url) {
-                        subject.createConsoleSubscriber()
+                        Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
                         gotDateCount += 1
                         if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                             completion(newSubjects)
@@ -91,7 +91,7 @@ class FileParser {
                             guard error == nil, let date = date else { return }
                             gotDateCount += 1
                             let subject = Factory.instance.createWebPageSubject(url: url, dateModified: date)
-                            subject.createConsoleSubscriber()
+                            Factory.instance.createConsoleSubscriber(forSubject: subject, sender: sender)
                             newSubjects.append(subject)
                             if self.isFinishedGettingDates(dateCount: gotDateCount, lineCount: lines.count){
                                 completion(newSubjects)
