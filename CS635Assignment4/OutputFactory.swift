@@ -16,6 +16,7 @@ class OutputFactory {
     
     func createEmail(to address: String, message: String) -> MFMailComposeViewController {
         let mailVC = MFMailComposeViewController()
+        mailVC.setSubject("Webpage updated")
         mailVC.setToRecipients([address])
         mailVC.setMessageBody(message, isHTML: false)
         return mailVC
@@ -24,6 +25,7 @@ class OutputFactory {
     func createText(to number: String, carrier: Carrier, message: String) -> MFMailComposeViewController {
         let mailVC = MFMailComposeViewController()
         let address = "\(number)@\(carrier.address)"
+        mailVC.setSubject("Webpage updated")
         mailVC.setToRecipients([address])
         mailVC.setMessageBody(message, isHTML: false)
         return mailVC

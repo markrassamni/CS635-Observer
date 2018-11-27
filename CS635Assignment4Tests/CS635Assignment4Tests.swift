@@ -8,7 +8,7 @@
 
 import XCTest
 import RxSwift
-import RxTest
+import MessageUI
 @testable import CS635Assignment4
 
 class CS635Assignment4Tests: XCTestCase {
@@ -136,8 +136,50 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertEqual(subject?.dateModified, "Date1")
     }
     
+    func testEmailOutput(){
+        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        let recipient = "test"
+        subject.createEmailSubscriber(sendTo: recipient, sender: mockSender)
+        subject.subject.onNext("newDate")
+        guard let mailVC = mockSender.getMailVC() else {
+            XCTAssertTrue(false)
+            return
+        }
+        let expected = MFMailComposeViewController()
+        expected.setSubject("Webpage updated")
+        expected.setToRecipients([recipient])
+        let message = "Web page \(subject.url) has been updated at \(subject.dateModified)"
+        expected.setMessageBody(message, isHTML: false)
+        XCTAssertEqual(mailVC, expected)
+    }
+    
+    func testTextOutput(){
+        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        let recipient = "test"
+        subject.createSMSSubscriber(sendTo: recipient, carrier: Carrier(name: "att")!, sender: mockSender)
+        subject.subject.onNext("newDate")
+        guard let textVC = mockSender.getTextVC() else {
+            XCTAssertTrue(false)
+            return
+        }
+        let expected = MFMailComposeViewController()
+        expected.setSubject("Webpage updated")
+        expected.setToRecipients([recipient])
+        let message = "Web page \(subject.url) has been updated at \(subject.dateModified)"
+        expected.setMessageBody(message, isHTML: false)
+        XCTAssertEqual(textVC, expected)
+    }
+    
     func testConsoleOutput(){
-        let _ = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
+        subject.createConsoleSubscriber(sender: mockSender)
+        subject.subject.onNext("newDate")
+        guard let output = mockSender.getConsoleOutput() else {
+            XCTAssertTrue(false)
+            return
+        }
+        let expected = "Web page \(subject.url) has been updated at \(subject.dateModified)"
+        XCTAssertEqual(output, expected)
     }
     
     func testSubscriber(){
