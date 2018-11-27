@@ -13,7 +13,7 @@ import RxTest
 
 class CS635Assignment4Tests: XCTestCase {
 
-    let testURL = "https://dzone.com/articles/6-reasons-why-you-should-go-for-a-static-website"
+    let testURL = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
     let testFile1 = "test1.txt"
     let testFile2 = "test2.txt"
     
