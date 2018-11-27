@@ -1,5 +1,5 @@
 //
-//  MockSender.swift
+//  MockOutput.swift
 //  CS635Assignment4
 //
 //  Created by Mark Rassamni on 11/26/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockSender: SenderProtocol {
+class MockOutput: SenderProtocol {
 
     private var mailVC: MailViewController?
     private var textVC: MailViewController?

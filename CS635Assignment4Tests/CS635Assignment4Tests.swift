@@ -18,7 +18,7 @@ class CS635Assignment4Tests: XCTestCase {
     let testFile2 = "test2.txt"
     
     let fileParser = FileParser()
-    let mockSender = MockSender()
+    let mockOutput = MockOutput()
     var mockConnection: MockConnectionHandler!
     
     override func setUp() {
@@ -39,7 +39,7 @@ class CS635Assignment4Tests: XCTestCase {
     }
     
     func testReadFileSuccessfully(){
-        let successfulRead = fileParser.readFile(file: testFile1, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let successfulRead = fileParser.readFile(file: testFile1, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             for subject in subjects {
                 subject.checkForUpdates(connectionHandler: self.mockConnection, updated: nil)
             }
@@ -49,7 +49,7 @@ class CS635Assignment4Tests: XCTestCase {
     
     func testSubjectCount(){
         var subjectsFound: Int?
-        let _ = fileParser.readFile(file: testFile1, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let _ = fileParser.readFile(file: testFile1, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             subjectsFound = subjects.count
         }
         XCTAssertEqual(subjectsFound, 2)
@@ -59,7 +59,7 @@ class CS635Assignment4Tests: XCTestCase {
         let mockConnection = MockConnectionHandler(mockDates: createIncrementingMockDates(count: 2))
         var subjectCount: Int?
         var subject: WebPageSubject?
-        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             subjectCount = subjects.count
             subject = subjects.first
         }
@@ -84,7 +84,7 @@ class CS635Assignment4Tests: XCTestCase {
     func testNoDateNilSubject(){
         let mockConnection = MockConnectionHandler(mockDates: [String]())
         var subject: WebPageSubject?
-        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             subject = subjects.first
         }
         XCTAssertTrue(success)
@@ -94,7 +94,7 @@ class CS635Assignment4Tests: XCTestCase {
     func testErrorNoNewMockDate(){
         let mockConnection = MockConnectionHandler(mockDates: createIncrementingMockDates(count: 1))
         var subject: WebPageSubject?
-        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             subject = subjects.first
         }
         XCTAssertTrue(success)
@@ -114,7 +114,7 @@ class CS635Assignment4Tests: XCTestCase {
         let mockConnection = MockConnectionHandler(mockDates: ["Date", "Date", "Date1"])
         var subjectCount: Int?
         var subject: WebPageSubject?
-        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, sender: mockSender) { (subjects) in
+        let success = fileParser.readFile(file: testFile2, connectionHandler: mockConnection, output: mockOutput) { (subjects) in
             subjectCount = subjects.count
             subject = subjects.first
         }
@@ -138,9 +138,9 @@ class CS635Assignment4Tests: XCTestCase {
     
     func testConsoleOutput(){
         let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        subject.createConsoleSubscriber(sender: mockSender)
+        subject.createConsoleSubscriber(output: mockOutput)
         subject.subject.onNext("newDate")
-        guard let output = mockSender.getConsoleOutput() else {
+        guard let output = mockOutput.getConsoleOutput() else {
             XCTAssertTrue(false)
             return
         }
@@ -150,7 +150,7 @@ class CS635Assignment4Tests: XCTestCase {
     
     func testSubscriber(){
         let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        subject.createEmailSubscriber(sendTo: "me", sender: mockSender)
+        subject.createEmailSubscriber(sendTo: "me", output: mockOutput)
         //create like this for mock:
         
 //        subject.subject.subscribe(onNext: { (date) in
