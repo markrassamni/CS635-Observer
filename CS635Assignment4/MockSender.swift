@@ -9,7 +9,7 @@
 import Foundation
 
 class MockSender: SenderProtocol {
-    // TODO: Remove mock and protocol? Dont need return vals like this
+
     private var mailVC: MailViewController?
     private var textVC: MailViewController?
     private var consoleOutput: String?

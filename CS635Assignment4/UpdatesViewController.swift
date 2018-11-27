@@ -53,3 +53,12 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
         }
     }
 }
+
+
+// TODO: Perform testing like this in an extension? In unit test class?
+extension UpdatesViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
