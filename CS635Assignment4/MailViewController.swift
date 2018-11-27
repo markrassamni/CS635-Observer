@@ -11,7 +11,6 @@ import MessageUI
 
 /// Class needed to compare MFMailComposeViewControllers in testing
 class MailViewController: MFMailComposeViewController {
-    
     private var subject: String?
     private var recipients: [String]?
     private var body: String?
