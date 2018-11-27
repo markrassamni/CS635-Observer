@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ConnectionProtocol: class {
+protocol ConnectionProtocol {
     func getDateModified(forURL url: String, completion: @escaping (Error?, String?) -> ())
     func getDateModified(forSubject subject: WebPageSubject, completion: @escaping (Error?, String?) -> ())
 }
