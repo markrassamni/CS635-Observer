@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import MessageUI
 
 protocol SenderProtocol {
-    func sendMail(mailVC: MFMailComposeViewController) -> MFMailComposeViewController?
-    func sendText(textVC: MFMailComposeViewController) -> MFMailComposeViewController?
+    func sendMail(mailVC: MailViewController) -> MailViewController?
+    func sendText(textVC: MailViewController) -> MailViewController?
     func sendConsole(output: String) -> String?
 }

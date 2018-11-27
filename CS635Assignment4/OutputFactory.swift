@@ -7,23 +7,22 @@
 //
 
 import Foundation
-import MessageUI
 
 class OutputFactory {
     
     private init(){}
     static let instance = OutputFactory()
     
-    func createEmail(to address: String, message: String) -> MFMailComposeViewController {
-        let mailVC = MFMailComposeViewController()
+    func createEmail(to address: String, message: String) -> MailViewController {
+        let mailVC = MailViewController()
         mailVC.setSubject("Webpage updated")
         mailVC.setToRecipients([address])
         mailVC.setMessageBody(message, isHTML: false)
         return mailVC
     }
     
-    func createText(to number: String, carrier: Carrier, message: String) -> MFMailComposeViewController {
-        let mailVC = MFMailComposeViewController()
+    func createText(to number: String, carrier: Carrier, message: String) -> MailViewController {
+        let mailVC = MailViewController()
         let address = "\(number)@\(carrier.address)"
         mailVC.setSubject("Webpage updated")
         mailVC.setToRecipients([address])

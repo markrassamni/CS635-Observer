@@ -7,20 +7,19 @@
 //
 
 import Foundation
-import MessageUI
 
 class MockSender: SenderProtocol {
     // TODO: Remove mock and protocol? Dont need return vals like this
-    private var mailVC: MFMailComposeViewController?
-    private var textVC: MFMailComposeViewController?
+    private var mailVC: MailViewController?
+    private var textVC: MailViewController?
     private var consoleOutput: String?
     
-    func sendMail(mailVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+    func sendMail(mailVC: MailViewController) -> MailViewController? {
         self.mailVC = mailVC
         return mailVC
     }
     
-    func sendText(textVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+    func sendText(textVC: MailViewController) -> MailViewController? {
         self.textVC = textVC
         return textVC
     }
@@ -30,14 +29,14 @@ class MockSender: SenderProtocol {
         return output
     }
     
-    func getMailVC() -> MFMailComposeViewController? {
-        let mail = mailVC?.copy() as? MFMailComposeViewController
+    func getMailVC() -> MailViewController? {
+        let mail = mailVC?.copy() as? MailViewController
         mailVC = nil
         return mail
     }
     
-    func getTextVC() -> MFMailComposeViewController? {
-        let text = textVC?.copy() as? MFMailComposeViewController
+    func getTextVC() -> MailViewController? {
+        let text = textVC?.copy() as? MailViewController
         textVC = nil
         return text
     }

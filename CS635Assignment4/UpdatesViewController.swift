@@ -31,12 +31,12 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
         }
     }
     
-    func sendMail(mailVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+    func sendMail(mailVC: MailViewController) -> MailViewController? {
         presentMailViewController(mailVC: mailVC, presented: nil)
         return nil
     }
     
-    func sendText(textVC: MFMailComposeViewController) -> MFMailComposeViewController? {
+    func sendText(textVC: MailViewController) -> MailViewController? {
         presentMailViewController(mailVC: textVC, presented: nil)
         return nil
     }
@@ -46,8 +46,8 @@ class UpdatesViewController: UIViewController, MFMailComposeViewControllerDelega
         return nil
     }
     
-    func presentMailViewController(mailVC: MFMailComposeViewController, presented: (()->())?){
-        guard MFMailComposeViewController.canSendMail() else { return }
+    func presentMailViewController(mailVC: MailViewController, presented: (()->())?){
+        guard MailViewController.canSendMail() else { return }
         mailVC.mailComposeDelegate = self
         self.present(mailVC, animated: true) {
             if presented != nil {
