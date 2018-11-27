@@ -148,29 +148,50 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertEqual(output, expected)
     }
     
-    func testSubscriber(){
-        let subject = SubjectFactory.instance.createWebPageSubject(url: testURL, dateModified: "date")
-        subject.createEmailSubscriber(sendTo: "me", output: mockOutput)
-        //create like this for mock:
-        
-//        subject.subject.subscribe(onNext: { (date) in
-//            
-//        }, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-        
-        
-        // TODO: Factory and mock factory. createEmailSubscriber on Factory protocol, calls correct method.
-        
+    func testGetMockMail(){
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
+        let mail = MailViewController()
+        mail.setSubject("Subject")
+        mail.setToRecipients(["test@me.com"])
+        mail.setMessageBody("Body", isHTML: false)
+        mockOutput.sendMail(mailVC: mail)
+        let mailReturned = mockOutput.getMailVC()
+        XCTAssertEqual(mail, mailReturned)
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
     }
     
-//    func testConsoleOutput(){
-//        let factory = Factory()
-//        let subject = factory.createStringPublishSubject()
-//        let _ = factory.createConsoleSubscriber(subject: subject)
-//        subject.onNext("Date 1")
-//        subject.onNext("Date 2")
-//
-//    }
-    // TODO: Go through all classes and remove extra vars
+    func testGetMockText(){
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
+        let text = MailViewController()
+        text.setSubject("Subject")
+        text.setToRecipients(["test@me.com"])
+        text.setMessageBody("Body", isHTML: false)
+        mockOutput.sendText(textVC: text)
+        let textReturned = mockOutput.getTextVC()
+        XCTAssertEqual(text, textReturned)
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
+    }
+    
+    func testGetMockPrint(){
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
+        let output = "Test"
+        mockOutput.sendConsole(output: output)
+        let outputReturned = mockOutput.getConsoleOutput()
+        XCTAssertEqual(output, outputReturned)
+        XCTAssertNil(mockOutput.getMailVC())
+        XCTAssertNil(mockOutput.getTextVC())
+        XCTAssertNil(mockOutput.getConsoleOutput())
+    }
 }
 
 
