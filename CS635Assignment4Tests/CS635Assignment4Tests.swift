@@ -193,5 +193,3 @@ class CS635Assignment4Tests: XCTestCase {
         XCTAssertNil(mockOutput.getConsoleOutput())
     }
 }
-
-
