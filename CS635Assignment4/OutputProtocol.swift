@@ -1,5 +1,5 @@
 //
-//  SenderProtocol.swift
+//  OutputProtocol.swift
 //  CS635Assignment4
 //
 //  Created by Mark Rassamni on 11/26/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SenderProtocol {
+protocol OutputProtocol {
     func sendMail(mailVC: MailViewController)
     func sendText(textVC: MailViewController)
     func sendConsole(output: String)

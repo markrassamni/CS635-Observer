@@ -9,14 +9,14 @@
 import UIKit
 import MessageUI
 
-class OutputViewController: UIViewController, MFMailComposeViewControllerDelegate, SenderProtocol {
+class OutputViewController: UIViewController, MFMailComposeViewControllerDelegate, OutputProtocol {
 
     var timer: Timer?
     var subjects: [WebPageSubject]?
     var connectionHandler: ConnectionHandler?
     
     func begin(file: String, existingSubjects: [WebPageSubject], timeInterval: TimeInterval, connection: ConnectionHandler) -> Bool {
-        return FileParser().readFile(file: file, connectionHandler: connection, existingSubjects: existingSubjects, sender: self) { (subjects) in
+        return FileParser().readFile(file: file, connectionHandler: connection, existingSubjects: existingSubjects, output: self) { (subjects) in
             self.timer?.invalidate()
             self.subjects = subjects
             self.timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.checkForUpdates), userInfo: nil, repeats: true)

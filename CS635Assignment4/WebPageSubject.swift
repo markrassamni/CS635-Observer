@@ -21,42 +21,42 @@ class WebPageSubject {
         self.dateModified = dateModified
     }
     
-    func createEmailSubscriber(sendTo emailAddress: String, sender: SenderProtocol){
+    func createEmailSubscriber(sendTo emailAddress: String, output: OutputProtocol){
         let _ = subject.subscribe(onNext: { (message) in
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            sender.sendMail(mailVC: mailVC)
+            output.sendMail(mailVC: mailVC)
         }, onError: { (error) in
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: error.localizedDescription)
-            sender.sendMail(mailVC: mailVC)
+            output.sendMail(mailVC: mailVC)
         }, onCompleted: {
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: "You will no longer receive updates about \(self.url)")
-            sender.sendMail(mailVC: mailVC)
+            output.sendMail(mailVC: mailVC)
         })
     }
     
-    func createSMSSubscriber(sendTo number: String, carrier: Carrier, sender: SenderProtocol) {
+    func createSMSSubscriber(sendTo number: String, carrier: Carrier, output: OutputProtocol) {
         let _ = subject.subscribe(onNext: { (message) in
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            sender.sendText(textVC: textVC)
+            output.sendText(textVC: textVC)
         }, onError: { (error) in
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: error.localizedDescription)
-            sender.sendText(textVC: textVC)
+            output.sendText(textVC: textVC)
         }, onCompleted: {
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: "You will no longer receive updates about \(self.url)")
-            sender.sendText(textVC: textVC)
+            output.sendText(textVC: textVC)
         })
     }
     
-    func createConsoleSubscriber(sender: SenderProtocol){
+    func createConsoleSubscriber(output: OutputProtocol){
         let _ = subject.subscribe(onNext: { (message) in
-            let output = OutputFactory.instance.createConsoleOutput(message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            sender.sendConsole(output: output)
+            let printOut = OutputFactory.instance.createConsoleOutput(message: "Web page \(self.url) has been updated at \(self.dateModified)")
+            output.sendConsole(output: printOut)
         }, onError: { (error) in
-            let output = OutputFactory.instance.createConsoleOutput(message: error.localizedDescription)
-            sender.sendConsole(output: output)
+            let printOut = OutputFactory.instance.createConsoleOutput(message: error.localizedDescription)
+            output.sendConsole(output: printOut)
         }, onCompleted: {
-            let output = OutputFactory.instance.createConsoleOutput(message: "You will no longer receive updates about \(self.url)")
-            sender.sendConsole(output: output)
+            let printOut = OutputFactory.instance.createConsoleOutput(message: "You will no longer receive updates about \(self.url)")
+            output.sendConsole(output: printOut)
         })
     }
     

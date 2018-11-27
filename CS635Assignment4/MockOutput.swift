@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockOutput: SenderProtocol {
+class MockOutput: OutputProtocol {
 
     private var mailVC: MailViewController?
     private var textVC: MailViewController?

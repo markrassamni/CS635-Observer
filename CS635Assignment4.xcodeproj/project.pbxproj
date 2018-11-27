@@ -18,7 +18,7 @@
 		F94E66EA21A3B8A600CA850A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E66E821A3B8A600CA850A /* LaunchScreen.storyboard */; };
 		F94E66F521A3B8A600CA850A /* CS635Assignment4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */; };
 		F951D1CE21ACC32300CE7CCF /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1CD21ACC32300CE7CCF /* OutputViewController.swift */; };
-		F951D1D821AD1A8F00CE7CCF /* SenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */; };
+		F951D1D821AD1A8F00CE7CCF /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1D721AD1A8F00CE7CCF /* OutputProtocol.swift */; };
 		F951D1DC21AD1AA800CE7CCF /* MockOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1DB21AD1AA800CE7CCF /* MockOutput.swift */; };
 		F951D1E021AD2FD900CE7CCF /* OutputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951D1DF21AD2FD900CE7CCF /* OutputFactory.swift */; };
 		F971701D21AD44E7003899FB /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971701C21AD44E7003899FB /* MailViewController.swift */; };
@@ -74,7 +74,7 @@
 		F94E66F421A3B8A600CA850A /* CS635Assignment4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS635Assignment4Tests.swift; sourceTree = "<group>"; };
 		F94E66F621A3B8A600CA850A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F951D1CD21ACC32300CE7CCF /* OutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
-		F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderProtocol.swift; sourceTree = "<group>"; };
+		F951D1D721AD1A8F00CE7CCF /* OutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
 		F951D1DB21AD1AA800CE7CCF /* MockOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOutput.swift; sourceTree = "<group>"; };
 		F951D1DF21AD2FD900CE7CCF /* OutputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFactory.swift; sourceTree = "<group>"; };
 		F971701C21AD44E7003899FB /* MailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				F995120621AC776A00B00E52 /* ConnectionProtocol.swift */,
 				F951D1CD21ACC32300CE7CCF /* OutputViewController.swift */,
 				F951D1DB21AD1AA800CE7CCF /* MockOutput.swift */,
-				F951D1D721AD1A8F00CE7CCF /* SenderProtocol.swift */,
+				F951D1D721AD1A8F00CE7CCF /* OutputProtocol.swift */,
 				F995120821AC7D2700B00E52 /* DateError.swift */,
 				0CA6F83C21A7CD9200FC50B8 /* Carrier.swift */,
 				F971701C21AD44E7003899FB /* MailViewController.swift */,
@@ -447,7 +447,7 @@
 				F995120721AC776A00B00E52 /* ConnectionProtocol.swift in Sources */,
 				F951D1CE21ACC32300CE7CCF /* OutputViewController.swift in Sources */,
 				F995120921AC7D2700B00E52 /* DateError.swift in Sources */,
-				F951D1D821AD1A8F00CE7CCF /* SenderProtocol.swift in Sources */,
+				F951D1D821AD1A8F00CE7CCF /* OutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

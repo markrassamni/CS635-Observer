@@ -15,7 +15,7 @@ class FileParser {
     private let consoleKey = "console"
     
     /// Boolean returned represents if successfully read all lines. Completion returns the array of subjects created
-    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects: [WebPageSubject] = [WebPageSubject](), sender: SenderProtocol, completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
+    func readFile(file: String, connectionHandler: ConnectionProtocol, existingSubjects: [WebPageSubject] = [WebPageSubject](), output: OutputProtocol, completion: @escaping ([WebPageSubject]) -> ()) -> Bool {
         guard let filePath = Bundle.main.path(forResource: file, ofType: nil) else { return false }
         let lines: [String]
         do {
@@ -34,7 +34,7 @@ class FileParser {
                 switch lineComponents[1]{
                 case emailKey:
                     guard lineComponents.count == 3 else { return false }
-                    handleEmailKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                    handleEmailKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, output: output) { (newSubject) in
                         linesHandled += 1
                         if let subject = newSubject {
                             newSubjects.append(subject)
@@ -45,7 +45,7 @@ class FileParser {
                     }
                 case smsKey:
                     guard lineComponents.count == 4, let carrier = Carrier(name: lineComponents[3]) else { return false }
-                    handleSMSKey(lineComponents: lineComponents, subjects: newSubjects, carrier: carrier, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                    handleSMSKey(lineComponents: lineComponents, subjects: newSubjects, carrier: carrier, connectionHandler: connectionHandler, output: output) { (newSubject) in
                         linesHandled += 1
                         if let subject = newSubject {
                             newSubjects.append(subject)
@@ -56,7 +56,7 @@ class FileParser {
                     }
                 case consoleKey:
                     guard lineComponents.count == 2 else { return false }
-                    handleConsoleKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, sender: sender) { (newSubject) in
+                    handleConsoleKey(lineComponents: lineComponents, subjects: newSubjects, connectionHandler: connectionHandler, output: output) { (newSubject) in
                         linesHandled += 1
                         if let subject = newSubject {
                             newSubjects.append(subject)
@@ -73,48 +73,48 @@ class FileParser {
         } catch { return false }
     }
     
-    private func handleEmailKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()) {
+    private func handleEmailKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, output: OutputProtocol, newSubject: @escaping (WebPageSubject?)->()) {
         let url = lineComponents[0]
         let email = lineComponents[2]
         if let subject = subjects.subject(forURL: url) {
-            subject.createEmailSubscriber(sendTo: email, sender: sender)
+            subject.createEmailSubscriber(sendTo: email, output: output)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
                 let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                subject.createEmailSubscriber(sendTo: email, sender: sender)
+                subject.createEmailSubscriber(sendTo: email, output: output)
                 newSubject(subject)
             }
         }
     }
     
-    private func handleSMSKey(lineComponents: [String], subjects: [WebPageSubject], carrier: Carrier, connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()){
+    private func handleSMSKey(lineComponents: [String], subjects: [WebPageSubject], carrier: Carrier, connectionHandler: ConnectionProtocol, output: OutputProtocol, newSubject: @escaping (WebPageSubject?)->()){
         let url = lineComponents[0]
         let number = lineComponents[2]
         if let subject = subjects.subject(forURL: url){
-            subject.createSMSSubscriber(sendTo: number, carrier: carrier, sender: sender)
+            subject.createSMSSubscriber(sendTo: number, carrier: carrier, output: output)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
                 let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                subject.createSMSSubscriber(sendTo: number, carrier: carrier, sender: sender)
+                subject.createSMSSubscriber(sendTo: number, carrier: carrier, output: output)
                 newSubject(subject)
             }
         }
     }
     
-    private func handleConsoleKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, sender: SenderProtocol, newSubject: @escaping (WebPageSubject?)->()){
+    private func handleConsoleKey(lineComponents: [String], subjects: [WebPageSubject], connectionHandler: ConnectionProtocol, output: OutputProtocol, newSubject: @escaping (WebPageSubject?)->()){
         let url = lineComponents[0]
         if let subject = subjects.subject(forURL: url) {
-            subject.createConsoleSubscriber(sender: sender)
+            subject.createConsoleSubscriber(output: output)
             newSubject(nil)
         } else {
             connectionHandler.getDateModified(forURL: url) { (error, date) in
                 guard error == nil, let date = date else { return }
                 let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: date)
-                subject.createConsoleSubscriber(sender: sender)
+                subject.createConsoleSubscriber(output: output)
                 newSubject(subject)
             }
         }

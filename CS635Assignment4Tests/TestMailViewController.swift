@@ -23,12 +23,12 @@ class TestMailViewController: UIViewController {
     
     func testEmailOutput(){
         let url = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
-        let mockSender = MockSender()
+        let mockOutput = MockOutput()
         let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: "date")
         let recipient = "test"
-        subject.createEmailSubscriber(sendTo: recipient, sender: mockSender)
+        subject.createEmailSubscriber(sendTo: recipient, output: mockOutput)
         subject.subject.onNext("newDate")
-        guard let mailVC = mockSender.getMailVC() else {
+        guard let mailVC = mockOutput.getMailVC() else {
             //  XCTAssertTrue(false)
             assert(false)
             return
@@ -45,11 +45,11 @@ class TestMailViewController: UIViewController {
     
     func testTextOutput(){
         let url = "http://www.eli.sdsu.edu/courses/fall18/cs635/notes/index.html"
-        let mockSender = MockSender()
+        let mockOutput = MockOutput()
         let subject = SubjectFactory.instance.createWebPageSubject(url: url, dateModified: "date")
-        subject.createSMSSubscriber(sendTo: "test", carrier: Carrier(name: "att")!, sender: mockSender)
+        subject.createSMSSubscriber(sendTo: "test", carrier: Carrier(name: "att")!, output: mockOutput)
         subject.subject.onNext("newDate")
-        guard let textVC = mockSender.getTextVC() else {
+        guard let textVC = mockOutput.getTextVC() else {
             //  XCTAssertTrue(false)
             assert(false)
             return
