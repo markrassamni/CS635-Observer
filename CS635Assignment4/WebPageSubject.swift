@@ -12,13 +12,15 @@ import Alamofire
 
 class WebPageSubject {
     
-    let subject: PublishSubject<String>
+    let subject: PublishSubject<OutputProtocol>
     let url: String
-    var dateModified: String
+    let output: OutputProtocol
+    private(set) var dateModified: String
     
     // TODO: Also pass in an output/mock subscriber factory
-    init(subject: PublishSubject<String>, url: String, dateModified: String) {
+    init(subject: PublishSubject<OutputProtocol>, output: OutputProtocol, url: String, dateModified: String) {
         self.subject = subject
+        self.output = output
         self.url = url
         self.dateModified = dateModified
     }
@@ -45,7 +47,7 @@ class WebPageSubject {
             } else if let date = date {
                 if date != self.dateModified {
                     self.dateModified = date
-                    self.subject.onNext(date)
+                    self.subject.onNext(self.output)
                     if updated != nil {
                         updated!(true)
                     }
