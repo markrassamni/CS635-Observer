@@ -24,39 +24,39 @@ class WebPageSubject {
     func createEmailSubscriber(sendTo emailAddress: String, sender: SenderProtocol){
         let _ = subject.subscribe(onNext: { (message) in
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            let _ = sender.sendMail(mailVC: mailVC)
+            sender.sendMail(mailVC: mailVC)
         }, onError: { (error) in
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: error.localizedDescription)
-            let _ = sender.sendMail(mailVC: mailVC)
+            sender.sendMail(mailVC: mailVC)
         }, onCompleted: {
             let mailVC = OutputFactory.instance.createEmail(to: emailAddress, message: "You will no longer receive updates about \(self.url)")
-            let _ = sender.sendMail(mailVC: mailVC)
+            sender.sendMail(mailVC: mailVC)
         })
     }
     
     func createSMSSubscriber(sendTo number: String, carrier: Carrier, sender: SenderProtocol) {
         let _ = subject.subscribe(onNext: { (message) in
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            let _ = sender.sendText(textVC: textVC)
+            sender.sendText(textVC: textVC)
         }, onError: { (error) in
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: error.localizedDescription)
-            let _ = sender.sendText(textVC: textVC)
+            sender.sendText(textVC: textVC)
         }, onCompleted: {
             let textVC = OutputFactory.instance.createText(to: number, carrier: carrier, message: "You will no longer receive updates about \(self.url)")
-            let _ = sender.sendText(textVC: textVC)
+            sender.sendText(textVC: textVC)
         })
     }
     
     func createConsoleSubscriber(sender: SenderProtocol){
         let _ = subject.subscribe(onNext: { (message) in
             let output = OutputFactory.instance.createConsoleOutput(message: "Web page \(self.url) has been updated at \(self.dateModified)")
-            let _ = sender.sendConsole(output: output)
+            sender.sendConsole(output: output)
         }, onError: { (error) in
             let output = OutputFactory.instance.createConsoleOutput(message: error.localizedDescription)
-            let _ = sender.sendConsole(output: output)
+            sender.sendConsole(output: output)
         }, onCompleted: {
             let output = OutputFactory.instance.createConsoleOutput(message: "You will no longer receive updates about \(self.url)")
-            let _ = sender.sendConsole(output: output)
+            sender.sendConsole(output: output)
         })
     }
     
